@@ -1,0 +1,1066 @@
+<html lang="pt">
+  <head>
+    
+    <title>Beleza Pura</title>  
+      
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="compiler/bootstrap.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link rel="stylesheet" href="compiler/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">
+    <link rel="stylesheet" href="social-login.css">
+    <link rel="icon" href="imgs/iconePizza.png" type="image/gif"> 
+    <link href="https://fonts.googleapis.com/css?family=Port+Lligat+Slab&display=swap" rel="stylesheet">
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>  
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
+    <script src="firebase.js"></script>
+      
+    <script src="Login.js"></script>
+      <script src="FinalizarCompra.js"></script>
+      
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyAxUeOKkUigYadZ07KCQuBQLybgzE0foxc"async defer></script>
+
+    
+  </head>
+    
+  <body class="d-flex flex-column h-100 container-fluid">
+         
+          
+
+              <nav class="navbar fixed-top navbar-expand-lg navbar-light corNav">
+
+                  <div class="container-fluid line">
+
+                      <a class="navbar-brand font corFont my-auto" href="#"><h4 class="my-0">Beleza Pura</h4></a>
+
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarSite">
+                          <span class="navbar-toggler-icon"></span>
+                      </button>
+
+                      <div class="collapse navbar-collapse " id="navBarSite">
+
+                          <ul class="navbar-nav mr-auto ml-3 ">
+                              <li class="nav-item ">
+                                  <a class="nav-link font ml-3 h5 my-0" href="index.html">Inicio</a>
+                              </li>
+                              <li class="nav-item dropdown">
+                                  <a class="nav-link font ml-3 h5 my-0" href=pizzas.html>Pizzas</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a class="nav-link font ml-3 h5 my-0" href="esfihas.html">Esfihas</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a class="nav-link font ml-3 h5 my-0" href="porcoes.html">Fogazas e Porções</a>
+                              </li>
+
+                          </ul>
+
+                          <ul class="navbar-nav">
+                              <div class="dropdown">
+                                  <li class="nav-item">
+
+                                          <img src="imgs/perfil.png" class="" id="dropdownPerfil" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" style="width: 40px; height: 40px; cursor: pointer;">
+                                          <div class="dropdown-menu dropdown-menu-right" aria-laballedby="dropdownPerfil">
+                                              <a href="#" class="dropdown-item" data-toggle="modal" data-target="#divModal" id="btnMenuLogin" disabled>Fazer Login</a>
+                                              <a href="#" class="dropdown-item" data-toggle="modal" data-target="#divModalCadastrar" id="btnMenuCadastro">Cadastrar-se</a>
+                                              <div class="dropdown-divider"></div>
+                                              <a href="#" class="dropdown-item" onclick="logout()" id="btnMenuSair">Sair</a>
+                                          </div>
+
+
+                                  </li>  
+                              </div>
+
+                          </ul>
+
+                      </div>
+
+                  </div>
+              </nav>
+                <div class="botaoFlutuante border border-light border-right-0" data-toggle="modal" data-target="#modalCarrinho">
+              <img src="imgs/carrinho.png" class="carrinhoFlutuante" >
+
+          </div>
+       <div class="container-fluid m-0 p-0 justify-content-center">
+          
+
+
+
+          <div class="container m-0 p-0 border   bg-white shadow-lg rounded  mx-auto" style="margin-top: 85px !important;"  >
+
+                <div class="row d-flex justify-content-center mt-1">
+                    <div class="col-sm-6 ">
+                        <h5 class="text-center font">Detalhes da compra</h5>
+                    </div>
+                  </div>
+              <div class="container bg-light p-1 col-10 mt-5 shadow-sm">
+                    <div class="row justify-content-center " >
+                        <div class="col text-center">
+                            <label class="fontTexto" id="saborPizza" style="text-align: center;">Sabor - </label>
+                        </div> 
+                        <div class="col text-center" >
+                            <label class="fontTexto "  id="lblQuantidade" style="text-align: center;">quantidade - </label>
+                        </div>
+                        <div class="col text-center" id="colBorda">
+                          <label class="fontTexto" id="borda" style="text-align: center;">Borda - </label>
+
+                        </div> 
+                        <div class="w-100 mt-3"></div>
+                        <div class="col text-center" >
+                            <label class="fontTexto d-block" id="tamanhoIngrediente">Tamanho - </label>
+                        </div>
+                      <div class="col text-center" id="colExtra">
+                            <label class="fontTexto d-block"  id="ingredienteExtra">Extras - </label>
+                        </div>
+                      <div class="col text-center" >
+                            <label class="fontTexto d-block" id="semIngrediente" style="text-align: center;">Sem - </label>
+                        </div>
+                    </div>
+                  <div class="row justify-content-center mt-1">
+
+
+                  </div>
+              </div>
+
+                <label class="font" id="lblBebidas" hidden> </label>
+              <label class="font" id="lblTipo" hidden></label>
+              <div class="container justify-content-center col-10 bg-light mt-4  ">
+                  <div class="row justify-content-center bg-light  " style="margin-top: 15px;">
+
+                    <div class="col text-center ">
+                        <div class="container mx-auto fontTexto">
+                                Escolha sua bebida
+                                <div class=" mesmo-tamanho mx-auto">
+                                    <img src="imgs/glass.png" id="btnAdd"  style=" cursor: pointer;" class="img-fluid  dropdown-toggle dropdown'''''''''  " data-toggle="dropdown"/>
+                                    
+                                        
+
+                                        <div class="dropdown-menu " id="bebidaMenu">
+                                            <!-- Dropdown menu links -->  
+                                              <h5 class="dropdown-header mt-5">Refrigerantes de 2 litros</h5>
+                                              <a class="dropdown-item" onclick="bebidas(this.id)" id="rg%Dolly-Guaraná%R$5,00" >Dolly R$5,00</a>
+                                              <a class="dropdown-item" onclick="bebidas(this.id)" id="rg%Coca-Cola%R$10,00">Coca-Cola R$10,00</a>
+                                              <a class="dropdown-item" onclick="bebidas(this.id)" id="rg%Guaraná#Antartica%R$10,00">Guárana Antártica R$10,00</a>
+                                              <h5 class="dropdown-header">Refrigerante de lata</h5>
+                                              <a class="dropdown-item" onclick="bebidas(this.id)" id="rl%Coca-Cola%R$4,00">Coca-Cola R$4,00</a>
+                                              <a class="dropdown-item" onclick="bebidas(this.id)" id="rl%Guaraná#Antartica%R$4,00">Guárana Antártica R$4,00</a>
+                                              <a class="dropdown-item" onclick="bebidas(this.id)" id="rl%Fanta#Laranja%R$4,00">Fanta Laranja R$4,00</a>
+                                              <a class="dropdown-item" onclick="bebidas(this.id)" id="rl%Fanta#Uva%R$4,00">Fanta Uva R$4,00</a>
+                                              <h5 class="dropdown-header">Alcoólicas</h5>
+                                              <a class="dropdown-item" onclick="bebidas(this.id)" id="cn%Cerveja#350ml%R$4,00">Cerveja 350ml R$4,00</a>
+                                              <a class="dropdown-item" onclick="bebidas(this.id)" id="cn%Cerveja#550ml%R$6,00">Cerveja 550ml R$6,00</a>
+                                              <h5 class="dropdown-header">Cerveja Long Neck</h5>
+                                              <a class="dropdown-item" onclick="bebidas(this.id)" id="cln%Budweiser%R$8,00">Budweiser R$8,00</a>
+                                              <a class="dropdown-item" onclick="bebidas(this.id)" id="cln%Heineken%R$8,00">Heineken R$8,00</a>
+                                              <a class="dropdown-item" onclick="bebidas(this.id)" id="cln%Smirnoff#Ice%R$8,00">Smirnoff Ice R$8,00</a>
+                                        </div>
+                                    
+                                </div>
+                        </div>
+                      </div>
+                    
+                  <div class="col text-center fontText justify-content-center">
+                            <div class="container mx-auto fontTexto">
+                                Adicione alguma Especificação
+                                <div class=" mesmo-tamanho mx-auto">
+                                    <img src="imgs/plus.png"  style=" cursor: pointer;" onclick="colocarModalTirar()"  data-toggle="modal" data-target="#modalEspecificacoes" class="img-fluid"/>
+                                </div>
+                            </div>    
+                            
+                            
+                                
+                            
+                    
+                    </div>
+        
+              </div>
+            </div>
+
+                <div class="row  justify-content-center">
+                    <div class="col-10 ">
+                        <label id="lblCount" hidden></label>
+                        <label class="fontTexto pl-3 mb-0 d-block bg-light">Sua Conta</label>     
+                        <ul class="list-group list-group-flush bg-light " style="" id="listCompra">
+                         
+                        </ul>
+                    </div>
+                </div>
+              <div class="row  justify-content-center">
+                  <div class="col-sm-6">
+                        <h5 class="text-center font  mt-5">Detalhes da Entrega</h5>      
+                  </div>
+              </div>
+              <div class="container bg-light col-10 p-0 ">
+                  <div class="container mt-5 pt-3">
+                      <div class="row  justify-content-center ">
+
+                        <div class="col-4 text-center">
+                            <label for="txtEnd" class="fontTexto " id="lblEndereco" style="float: center;">Endereço: </label>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" class="form-control" name="txtEndereco" id="txtEnd"> 
+                        </div>
+
+                      </div>
+                  </div>
+                  <div class="container ">
+                      <div class="row mt-2 justify-content-center ">
+                        <div class="col-4 text-center ">
+                            <label class="fontTexto ajuste-texto">Tipo de Pedido:</label>
+                        </div>
+                        <div class="col-8 ">
+                            <div class="form-check-inline">
+                                <label class="form-check-label fontTexto ajuste-texto">
+                                    <input type="radio" class="form-check-input" name="opcPedido" value="entrega">Entrega
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label fontTexto ajuste-texto">
+                                    <input type="radio" class="form-check-input" name="opcPedido" value="retirada">Retirada
+                                </label>
+                            </div>            
+                        </div>
+                      </div>
+                  </div>
+                    <div class="container ">
+                          <div class="row mt-2 justify-content-center ">
+                                <div class="col-4 text-center ">
+                                    <label class=" fontTexto">Opção de pagamento:</label>
+                                </div>
+                                <div class="col-8 ">
+                                    <div class="form-group ml-2">
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label fontTexto">
+                                                <input type="radio" class="form-check-input fontTexto ajuste-texto" name="opcPagamento" value="Cartão1de1crédito">Cartão de crédito/débito
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label fontTexto">
+                                                <input type="radio" class="form-check-input fontTexto ajuste-texto" name="opcPagamento" value="Dinheiro">Dinheiro
+                                            </label>
+                                        </div>            
+                                    </div>         
+                                </div>
+                          </div> 
+                    </div>
+              </div>
+                <div class="row mt-5">
+                <div class="col-10 mx-auto mb-3">
+                    <input type="button" name="btnComprar" class="btn form-control bg-danger text-white fontTexto" id="btnComprar" value  ="Finalizar compra">
+                </div>
+
+              </div>
+                    
+                </div>
+              <footer class="footer mt-5 py-3 mb-0 corNav text-light">
+                        <div class="container text-center">
+                              <div class="row">
+
+                                  <div class="col-sm-4 fontTexto">
+
+                                      <p class="mt-3 h5 fontTexto"><u>Pizzaria Beleza Pura&#169;</u></p>
+
+                                  </div>
+
+                                  <div class="col-sm-4">
+
+                                      <p class="h6 fontTexto"><u>Email: pizzariabelezapura@gmail.com</u></p>
+                                      <p class="h6 fontTexto"><u>WhatsApp: (11) 98142-3024</u></p>
+
+                                  </div>
+
+                                  <div class="col-sm-4">
+
+                                      <img src="imgs/iconeInstagram.png" width="50px" height="50px">
+
+                                      <a class="" href="https://www.facebook.com/pages/Pizzaria-Beleza-Pura/521097314912516?__tn__=HH-R&eid=ARANHActo3KJFjlsU-B4O60BgxdNJF2zTj1fZFQ7JXU9CFOBbp8cN2H6RBuKwKzxVz8H_DSgk83M-L4Y&__xts__[0]=68.ARBNFX_sF0YN4XStkhS2STGlhP5R4gQ-DfUnMO0t_MTefSdWtWn_HMcqvmvRPIdnKhwSqPXOdNACu0qJ7ChQLfp2VfGA_vdwo1ubo0tTURRNCW3orB36P3bAfYAbAVCmNqc3oKLalSiWAc_t9JDO7CQGyzEeinRYfO_b3D1kzqOU4vrAw_70di-Y86u-HarFqakJn61qHBRhu_TiaPvY3Tj1vuw6oil9KnHRB1w4lPGxZMQYFk3TCA6VrsPV_yOeHDWMXNudcGiLvMJkuRbYtdC0q1woIJjU" target="_blank"><img src="imgs/iconeFacebook.png" width="50px" height="50px"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>    
+            </div>
+      
+     
+      
+      <!-- MODAIS -->
+      <div class="modal fade" id="divModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font" id="exampleModalLabel">Fazer login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="caixa-email" class="col-form-label font">Email:</label>
+                            <input type="email" id="txtEmail" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="caixa-senha" class="col-form-label font">Senha:</label>
+                            <input type="password" id="txtSenha" class="form-control">
+                        </div>
+                        
+                    </form>
+                </div>
+                <div class="modal-footer font">
+                    <a href="#" class="mr-auto text-danger" data-toggle="modal" data-target="#divModalCadastrar" data-dismiss="modal">Cadastrar-se</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" id="btnLogin" class="btn btn-danger">Entrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalEspecificacoes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font" id="exampleModalLabel">Adicione sua Especificação</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    
+                        <div class="row   fontTexto ">
+                            <div class="col">
+                                Selecione se quiser tirar um dos ingredientes:
+                            </div>
+
+                        </div>
+                 
+                  
+                    <div class="row p-0 m-0 justify-content-center" id="inputTirar">
+                    </div>
+                    <div class="row fontTexto">
+                        <div class="col">
+                            Envie alguma Recomendação ao Pizzaolo:
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col d-block" >
+                            <input type="text" style="width:100% " id="textPizzaolo" class="text fontTexto "/>
+                        </div>
+                    </div>
+                        
+                   
+                </div>
+                <div class="modal-footer font text-black">
+                    
+                    <button type="button" class="btn btn-danger text-black" data-dismiss="modal">Sair</button>
+                     <button type="button" class="btn btn-success text-black" onclick="colocarEspecificacao()" data-dismiss="modal">Concluído</button>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <div class="modal fade" id="divModalCadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h5 class="modal-title font corFont " id="exampleModalLabel">Fazer cadastro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="caixa-cep" class="col-form-label font">CEP:</label>
+                            <input name="cep" type="text" id="cep" class="form-control" onkeypress="$(this).mask('00000-000')" placeholder="00000-000">
+                        
+                        </div>
+                        <div class="form-group p-1">
+                            <label for="txtNomeCadastrar" class="col-form-label font">Nome:</label>
+                            <input type="text" id="txtNomeCadastrar" class="form-control" required>
+                        </div>
+                        <div class="form-group p-1">
+                            <label for="txtEmailCadastrar" class="col-form-label font">Email:</label>
+                            <input type="email" id="txtEmailCadastrar" class="form-control">
+                        </div>
+                        <div class="form-group col-6 float-left p-1">
+                            <label for="txtSenhaCadastrar" class="col-form-label font">Senha:</label>
+                            <div class="input-group">
+                                <input type="password" id="txtSenhaCadastrar" class="form-control border-right-0">
+                                <div class="input-group-append ">
+                                    <div class="btn btn-outline-secondary form-control border border-dark "><img src="imgs/mostrarSenha.png" id="showPassword" value="show" height="25px"/></div>
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="form-group col-6 float-left p-1">
+                            <label for="txtConfirmarSenhaCadastrar" class="col-form-label font">Confirmar senha:</label>
+                            <input type="password" id="txtConfirmarSenhaCadastrar" class="form-control">
+                        </div>
+                        
+                        
+                    </form>
+                </div>
+                <div class="modal-footer font">
+                    
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnCadastrar" class="btn btn-danger">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <div class="modal fade" id="modalCarrinho" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font" id="exampleModalLabel">Carrinho</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <table class="table mb-0">
+                    <thead class="fontTexto bg-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Item</th>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Preço</th>
+                            <th scope="col">Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="pizzaCarrinho" class="fontTexto text-dark">
+                        
+                    </tbody>
+                    <tr class="fontTexto bg-light">
+                        <td colspan="4" >Total:</td>
+                        <td colspan="2" id="totalCarrinho"></td>
+                    </tr>
+                </table>
+                <!--<div id="pizzaCarrinho"></div>-->
+                
+                
+                <div class="modal-footer font">
+                    
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnFinalizarCompra" class="btn btn-danger" data-dismiss="modal">Finalizar compra</button>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+
+    <script type="text/javascript">
+
+        function colocarModalTirar(){
+            let tipo = document.getElementById("lblTipo").innerHTML;
+           
+            if(tipo == "e"){
+                 return
+            }else if(tipo == "b"){
+                return
+            }else if(tipo == "p"){
+                return
+            }else if(tipo == "s"){
+                return
+            }else if(tipo == "f"){
+                return
+            }else{
+                var tipoBanco = "pizzas";
+            }
+
+            var sabor = document.getElementById("saborPizza").innerHTML.replace("Sabor - ","");
+            var ref  = firebase.database().ref(tipoBanco +'/' + sabor) ;
+            document.getElementById("inputTirar").innerHTML = "";
+            
+            ref.child("detalhes").on('value',function(snapshot){
+                 var ingredientes = snapshot.val().replace(/ e /g,",").replace(/ com /g,",").split(",");               
+                function inputTirar(item){
+                    var div = document.getElementById("inputTirar");
+                    div.innerHTML += ['<div class="col-auto fonTexto  d-inline"> <input name="tirarIngrediente" id="'+item.replace(/ /g,"#")+'"type="checkBox" value="'+item+'"/><label class="ml-2 fontTexto" for="'+item.replace(/ /g,"#")+'" style="">'+ item+'</label></div>']
+                }
+                ingredientes.forEach(inputTirar);
+            });
+            
+        }
+        function colocarEspecificacao(){
+            var ingredientes = document.querySelectorAll('input[name="tirarIngrediente"]:checked');
+           
+            if(document.getElementById("textPizzaolo").value.length != 0){
+                 var strPizzaolo = document.getElementById("textPizzaolo").value;
+            }else{
+                 var strPizzaolo = null;
+            }
+            var divEspecificacao = document.getElementById("semIngrediente");
+             var teste = divEspecificacao.innerHTML;
+             var str = "";
+             var todaStr = divEspecificacao.innerHTML;
+            
+            for(var x = 0, l = ingredientes.length; x < l;  x++){
+           
+                str += ingredientes[x].value + ",";
+            }
+            
+            if(todaStr == "Sem - Sem Especificações"){
+                
+                if (strPizzaolo != null){
+                    divEspecificacao.innerHTML = "Sem - " + str  + strPizzaolo ;    
+                }else{
+                    divEspecificacao.innerHTML = "Sem - " + str.substring(0,str.length - 1)  ;    
+
+                }
+            }else{
+                if (strPizzaolo != null){
+                    divEspecificacao.innerHTML += "," +str.substring(0,str.length - 1) + "," + strPizzaolo;
+                }else{
+                    divEspecificacao.innerHTML += str.substring(0,str.length - 1)  ;    
+
+                }
+            }
+            
+              
+            
+            
+        }
+
+        function bebidas(bebida){
+            var valorTotal = document.getElementById("listCompraValorTotal");
+              function colocarUltimo(idTotal , valorAdd){
+                  var valor = idTotal.innerHTML.replace("R$","");
+                  valor = parseFloat(valor) + valorAdd;
+                  var lista = document.getElementById("listCompra");
+                  lista.innerHTML += ['<li class="list-group-item d-flex justify-content-between align-items-center fixed fontTexto bg-light" >Total da compra<span class="badge badge-danger badge-pill" id="listCompraValorTotal">R$'+ valor.toFixed(2) +'</span></li>' ]
+                
+              }
+            
+              var dadosBebida = bebida.split("%");
+              var tipoBebida = dadosBebida[0];
+              var valor = parseFloat( dadosBebida[2].replace("R$","") );
+              var nome = dadosBebida[1].replace("#"," ");
+              var lista = document.getElementById("listCompra");
+              var lblBebidas = document.getElementById("lblBebidas");
+              lblBebidas.innerHTML += nome + ",";
+              if(tipoBebida == "rg"){
+                  var tamanhoBebida = "2 litros"
+              }else if(tipoBebida == "rl"){
+                  var tamanhoBebida = "lata"
+              }else if(tipoBebida == "cn"){
+                  var tamanhoBebida = "lata"
+               }else{
+                   var tamanhoBebida = "long Neck"
+               }
+              
+              var array = document.getElementById("lblCount").innerHTML.slice(0, -1).split(",");
+              var counter = parseFloat(array[array.length - 1 ]);
+            
+             
+             
+              lista.removeChild(lista.lastChild);
+              counter = counter + 1;
+             
+              lista.innerHTML += ['<li class="list-group-item d-flex justify-content-between align-items-center fontTexto bg-light" >'+nome + " "+ tamanhoBebida +'<span class="badge badge-danger badge-pill" name="valorLista" style="margin-left:auto;">R$'+valor.toFixed(2)+'</span><span class="close"style="margin-bottom:15px;" id="'+ counter+' " onclick="removerLista(this.id)">&times;</span></li>' ]
+              document.getElementById("lblCount").innerHTML += counter  + ",";
+              
+              colocarUltimo(valorTotal, valor);
+             
+              
+        }
+        
+          var contador = 0;
+          
+         function removerLista(id){
+           
+             var lista = document.getElementById("listCompra");
+             var array = document.getElementById("lblCount").innerHTML.slice(0, -1).split(",");
+
+             let y = id - 1;
+             var n = parseInt(id);
+             
+             for(var j = 0 , h = array.length;j<h;j++){
+                 let num = parseInt(array[j]);
+                 if(num == n){
+                     
+                     var conteudo = lista.childNodes[j + 1].innerHTML;
+                     var valorSub = parseFloat(conteudo.substring(conteudo.indexOf("$") + 1,conteudo.indexOf("$")+ 5));
+    
+                     lista.removeChild(lista.childNodes[j + 1]);
+                     let x = id - contador;
+                     var totalValue = parseFloat(document.getElementById("listCompraValorTotal").innerHTML.replace("R$",""));
+                     var  m = totalValue - valorSub;
+                     contador+=1;
+                     array.splice(array.indexOf(id), 1);
+                     document.getElementById("lblCount").innerHTML = array.join() + ",";
+                     document.getElementById("listCompraValorTotal").innerHTML = "R$" +  m.toFixed(2) ; 
+                 }
+             }
+            
+        
+             
+  
+         }
+          
+          /**function calcularDistancia() {
+                  origin = "Rua do Camuengo" ;//Get the source string
+                  destination = document.getElementById('txtEnd').value; //Get the destination string
+                  var service = new google.maps.DistanceMatrixService(); //initialize the distance service
+                  service.getDistanceMatrix(
+                    {
+                      origins: [origin], //set origin, you can specify multiple sources here
+                      destinations: [destination],//set destination, you can specify multiple destinations here
+                      travelMode: google.maps.TravelMode.DRIVING, //set the travelmode
+                      unitSystem: google.maps.UnitSystem.METRIC,//The unit system to use when displaying distance
+                      avoidHighways: false,
+                      avoidTolls: false
+                    }, calcDistance); // here calcDistance is the call back function
+                }
+          function calcDistance(response, status) {
+              if (status != google.maps.DistanceMatrixStatus.OK) { // check if there is valid result
+                alert('Error was: ' + status);
+              } else {
+                var origins = response.originAddresses;
+                var destinations = response.destinationAddresses;
+      
+
+                for (var i = 0; i < origins.length; i++) {
+                  var results = response.rows[i].elements;
+
+                  for (var j = 0; j < results.length; j++) {
+                    var distancia = parseFloat(results[j].distance.text.replace("km",""));
+                    var frete = 0;
+                    if(distancia > 6){
+                        alert("Desculpe, não entregamos na sua região ainda")
+                    }else if(distancia >=5){
+                        frete = 7;
+                    }else if(distancia >=4){
+                        frete = 6;
+                    }else if(distancia >=3){
+                        frete = 5;
+                    }else if(distancia >=2){
+                        frete = 4;
+                    }else if(distancia >=1){
+                        frete = 2;
+                    }
+                    alert(distancia)
+                      alert(frete)
+                    alert ('Distance from '+origins[i] + ' to ' + destinations[j]
+                        + ': ' + results[j].distance.text ); // alert the result
+                  }
+                }
+              }
+        }
+        **/
+          function mandarPedido(nome,quantidade,sem,tamanho,extras,borda,bebidas,endereco,tipoEntrega,opcPagamento){
+             let tipo = document.getElementById("lblTipo").innerHTML;
+             
+           
+            if(tipo == "e"){
+                 var tipoBanco = "esfiha";
+            }else if(tipo == "b"){
+                var tipoBanco = "batata";
+            }else if(tipo == "p"){
+                var tipoBanco = "pacote";
+            }else if(tipo == "s"){
+                var tipoBanco = "porção";
+            }else if(tipo == "f"){
+                var tipoBanco = "fogazza";
+            }else{
+                var tipoBanco = "pizzas";
+            }
+              
+             
+              const database = firebase.database();
+              var strEmail = localStorage.getItem("email");
+              var email = strEmail.split("@",1);
+              var data = new Date;
+              var dataMili = data.getTime();
+              bebidasCerto = bebidas.replace(/á/g,"a");
+              email = btoa(email)
+              
+            
+             firebase.database().ref("compras"+ "/" + dataMili).set({
+                
+                produto: String(nome),
+                especificacoes: sem,
+                quantidade: quantidade,
+                tamanho: tamanho,
+                extras: extras,
+                borda: borda,
+                bebidas: bebidasCerto,
+                endereco: endereco,
+                tipoEntrega: tipoEntrega,
+                opcPagamento: opcPagamento,
+                 tipoProduto: tipoBanco,
+                 data: dataMili,
+                 cliente: email
+                 
+                
+                
+
+                }).then(function(docRef){
+
+                console.log(nome);
+                alert("Seu pedido foi feito com sucesso!");
+
+                }).catch(function(error){
+                console.error(error);
+              });
+             //  var endereco = document.getElementById();
+             // var tipoEntrega = ;
+             // var modoPagamento
+          }
+         
+          
+        function colocarDadosCompra(){
+            var lblSabor = document.getElementById("saborPizza");
+            var lblSem = document.getElementById("semIngrediente");
+             var lblCount = document.getElementById("lblCount");
+             lblCount.display="none";
+
+            var query = location.search.slice(1);
+            var todosDados = atob(query).split('%');
+            var sabor = todosDados[0].replace(/1/g," ").split("$");
+            lblSabor.innerHTML += sabor; 
+       
+
+            var borda = todosDados[todosDados.length- 2];
+            if(borda == "Sem1borda"){
+                document.getElementById("colBorda").remove();
+            }else{
+                document.getElementById("borda").innerHTML += borda.replace(/1/g," ");
+            }
+            var tamanho =  todosDados[1];
+            //E para esfiha, b para batata, p para pacotes de esfiha , s para porcoes, f para foggazas
+            
+            let teste =tamanho.substring(0,2) ;
+            if( teste.substring(0,1) == "e"){
+                document.getElementById("tamanhoIngrediente").innerHTML = "Tipo: Esfiha";
+                var preco = tamanho.substr(1);
+                document.getElementById("lblTipo").innerHTML = "e";
+                
+            
+            }else if(teste.substring(0,1) == "p"){
+                var preco = tamanho.substr(1);
+                document.getElementById("tamanhoIngrediente").innerHTML = "Pacote de Esfiha " ;
+                 document.getElementById("lblTipo").innerHTML = "p";
+                  
+            }
+            else if(teste.substring(0,1) == "b"){
+                let tamanhoBatata = teste.substring(1);
+                
+                if(tamanhoBatata == "G"){
+                    var preco = 23.00;
+                    tamanho = "Batata Grande R$" + preco.toFixed(2);
+                }else{
+                    var preco = 12.00;
+                    tamanho = "Batata Pequena R$" + preco.toFixed(2);
+                }
+                document.getElementById("tamanhoIngrediente").innerHTML += tamanho;
+                document.getElementById("lblTipo").innerHTML = "b";
+            
+                
+                     
+            }
+            else if(teste.substring(0,1) == "s"){
+                let tamanhoBatata = teste.substring(1);
+                 var preco = (tamanho.substr(2));
+                if(tamanhoBatata == "G"){
+                    tamanho = "Porção Grande R$" + preco;
+                }else{
+                    tamanho = "Porção Pequena R$" + preco;
+                }
+                document.getElementById("tamanhoIngrediente").innerHTML += tamanho;
+                 document.getElementById("lblTipo").innerHTML = "s";
+                
+                
+            }
+             else if(teste.substring(0,1) == "f"){
+                 var preco = (tamanho.substr(1));
+                document.getElementById("tamanhoIngrediente").innerHTML = "Tipo: Fogazza";
+                  document.getElementById("lblTipo").innerHTML = "f";
+                
+                
+            }
+            else{
+                var preco = tamanho.substr(1);
+                var tipo = tamanho.substring(0,1);
+                if(tipo.indexOf("G") == -1){
+                tamanho = "Pizza Broto R$" + preco;
+                
+                }else{
+                tamanho = "Pizza Grande R$"+ preco;
+                }
+                document.getElementById("tamanhoIngrediente").innerHTML += tamanho;
+            }
+            
+            
+            var quantidade = todosDados[2];
+            quantidade = quantidade.split("$");
+            var quantidadeTotal = 0;
+            for(var j = 0,f = quantidade.length;j<f;j++){
+                quantidadeTotal += parseFloat(quantidade[j]);
+            }
+            var lblQuantidade= document.getElementById("lblQuantidade");
+            lblQuantidade.innerHTML+= quantidadeTotal;
+            var ingredienteExtra = todosDados[todosDados.length - 1].substr(1);
+            var todosIngredienteExtra = document.getElementById("ingredienteExtra");
+            if(ingredienteExtra == "em1Extras"){
+                document.getElementById("colExtra").style.display="none";
+                todosIngredienteExtra.innerHTML = "Sem Extras";
+                
+
+            }else{
+                ingredienteExtra = ingredienteExtra.split("$");
+                let cont = ingredienteExtra.length - 1   ;
+                for(var x =0, l= ingredienteExtra.length; x <l;x++){
+                    let cont = ingredienteExtra.length - 1   ;
+                    if(x == cont){
+                        todosIngredienteExtra.innerHTML +=  ingredienteExtra[x];
+                    } else{
+                        todosIngredienteExtra.innerHTML +=  ingredienteExtra[x] + ", " ;
+                    }
+                
+            }
+            
+            
+            
+            
+            }
+            var sem = todosDados[3];
+            if(sem != "Sem1Especificacoes"){
+                sem = sem.replace(/1/g," ").substr(1).split("$");
+                for(var i = 0, l = sem.length; i < l; i++){
+                    let x = sem.length - 1   ;
+                    if(i == x){
+                        lblSem.innerHTML += sem[i];
+                    }else{
+                       lblSem.innerHTML += sem[i] + ", ";
+                     } 
+                }
+            }else{
+                sem = "Sem Especificações";
+                lblSem.innerHTML += sem;
+            }
+            
+            //listacompras
+            var listBorda = " ";
+            var countLista =1;
+            let k = 3;
+            let p = 5;
+           
+            
+            
+            
+            var listCompra = document.getElementById("listCompra");
+            if(teste == "p1"){
+                preco = 20.00;
+            }else if(teste == "p2"){
+                preco = 20.00;
+            }
+             else if(teste == "p3"){
+                preco = 25.00;
+            }
+            else if(teste == "p4"){
+                preco = 40.00;
+            }
+            else if(teste == "p5"){
+                preco = 50.00;
+            }else{
+                preco = parseFloat(preco) * quantidade;
+            }
+            
+
+            listCompra.innerHTML += ['<li class="list-group-item d-flex justify-content-between align-items-center fontTexto bg-light" >'+ sabor+'<span class="badge badge-danger badge-pill" id="valorListaf" style="margin-left:auto;">R$'+parseFloat(preco).toFixed(2)+'</span><span class="close"style="margin-bottom:15px;" id='+ countLista +' onclick="removerLista(this.id)">&times;</span></li>' ]
+             lblCount.innerHTML += countLista + ",";
+             countLista +=1;
+            
+            var precoTotal =  parseFloat(preco);
+            if(borda == "cheddar" || borda == "catupiry" ){
+               listCompra.innerHTML += ['<li class="list-group-item d-flex justify-content-between align-items-center fontTexto bg-light" >Borda de '+ borda+'<span class="badge badge-danger badge-pill" id="valorLista" style="margin-left:auto;">R$'+ k.toFixed(2) +'</span><span class="close"style="margin-bottom:15px;" id="'+ countLista +'" onclick="removerLista(this.id)">&times;</span></li>' ]
+                precoTotal  += 3.00;
+                lblCount.innerHTML +=  countLista + ",";
+                countLista +=1;
+                
+               
+             }
+            
+         
+             if(todosIngredienteExtra.innerHTML != "Sem Extras"){
+                function colocarExtras(item){
+                
+                    if(item == "catupiry" || item == "cheddar" || item == "calabresa" || item == "presunto" || item == "frango"  ){
+                     listCompra.innerHTML += ['<li class="list-group-item d-flex justify-content-between align-items-center fontTexto bg-light" >'+item+' Extra<span class="badge badge-danger badge-pill" id="valorLista" style="margin-left:auto;">R$'+ p.toFixed(2    ) +'</span><span class="close"style="margin-bottom:15px;" id="'+ countLista +'" onclick="removerLista(this.id)">&times;</span></li>']
+                     precoTotal += 5.00;
+                     lblCount.innerHTML += countLista+ ",";
+                     countLista += 1;
+                     
+                    }else{
+                    
+                     listCompra.innerHTML += ['<li class="list-group-item d-flex justify-content-between align-items-center fontTexto bg-light" >'+item+' Extra<span class="badge badge-danger badge-pill" id="valorLista" style="margin-left:auto;">R$'+ k.toFixed(2) +'</span><span class="close"style="margin-bottom:15px;" id="'+ countLista +'" onclick="removerLista(this.id)">&times;</span></li>']
+                     precoTotal += 3.00;
+                     lblCount.innerHTML += countLista+ ",";
+                     countLista += 1;
+                    
+                    }
+                }
+                ingredienteExtra.forEach(colocarExtras);                
+            }
+            
+            var bebidaMenu = document.getElementById("bebidaMenu");
+            let contadorBebidas = 0;
+
+
+
+            listCompra.innerHTML += ['<li class="list-group-item d-flex justify-content-between align-items-center fixed fontTexto bg-light" >Total da compra<span class=" badge badge-danger badge-pill" id="listCompraValorTotal">R$'+  precoTotal.toFixed(2) +'</span></li>' ]
+        
+            //mandar dados para o banco
+            
+            btnComprar.addEventListener('click', e => {
+                //calcularDistancia();
+                var lblBebidas = document.getElementById("lblBebidas");
+                lblBebidas.style.display="none";
+
+                var extras = todosIngredienteExtra.innerHTML;
+                if(extras != "Sem Extras"){
+                    extras = extras.substring(7);
+                   
+                }
+                var bordaRecheada = borda.replace("Borda :","").replace(/1/g," ");
+                var strSabor = sabor;
+                
+                var especificacoes = document.getElementById("semIngrediente").innerHTML.replace("Sem - ","");
+           
+                var btnComprar = document.getElementById("btnComprar");
+                if(document.getElementById("txtEnd").value.length != 0){
+                    var endereco = document.getElementById("txtEnd").value;
+                     if(document.querySelector('input[name = opcPedido ]:checked') != null){
+                            var lblPedido = document.querySelector('input[name = opcPedido]:checked').value;
+                            if(document.querySelector('input[name = opcPagamento ]:checked') != null){
+                                var lblPagamento = document.querySelector('input[name = opcPagamento]:checked').value;
+                                var quantidade = document.getElementById("lblQuantidade").innerHTML.replace("quantidade - "," ");
+                                mandarPedido(strSabor,quantidade,especificacoes,tamanho,extras,bordaRecheada,lblBebidas.innerHTML,endereco,lblPedido,lblPagamento);
+            
+                            }else{
+                                alert("Selecione o tipo de pagamento por favor!")
+                            }
+                     }else{
+                        alert("Selecione o tipo de pedido, por favor!")
+                    }
+                }else{
+                    alert("insira um endereço por favor!");
+                }
+               
+                
+
+
+
+
+
+            });
+           
+        }
+        
+        
+        function logout(){
+            
+            firebase.auth().signOut().then(function(){
+                localStorage.removeItem("email");
+                window.location.reload(true);
+            }).catch(function(error){
+                
+            });
+            
+        }
+        
+        (function(){
+            var teste = localStorage.getItem("email");
+            console.log(teste);
+            if(teste){
+                const btnMenuLogin = document.getElementById('btnMenuLogin');
+                const btnMenuCadastrar = document.getElementById('btnMenuCadastro');
+                btnMenuLogin.classList.add("disabled");
+                btnMenuCadastrar.classList.add("disabled");
+            }else{
+                const btnMenuSair = document.getElementById('btnMenuSair');
+                btnMenuSair.classList.add("disabled");
+            }
+            
+            const txtEmail = document.getElementById('txtEmail');
+            const txtSenha = document.getElementById('txtSenha');
+            const btnLogin = document.getElementById('btnLogin');
+            var logar;
+            logar = new Login();
+
+            btnLogin.addEventListener('click', e => {
+                
+                const emailLogin = txtEmail.value;
+                const senhaLogin = txtSenha.value;
+                
+                btnLogin.addEventListener("teste", function(e){
+
+                    logar.logar(emailLogin, senhaLogin);
+                    
+                    
+                }, false);
+
+                var event = new CustomEvent("teste", {detail: {beleza: true}}); 
+
+                btnLogin.dispatchEvent(event);
+                
+                logar.verificarPersistencia();
+                var url = window.location.href;
+                console.log(url);
+                
+                
+            });
+            
+            const txtEmailCadastrar = document.getElementById('txtEmailCadastrar');
+            const txtSenhaCadastrar = document.getElementById('txtSenhaCadastrar');
+            const btnCadastrar = document.getElementById('btnCadastrar');
+            const txtNomeCadastrar = document.getElementById('txtNomeCadastrar');
+            const txtConfirmarSenhaCadastrar = document.getElementById('txtConfirmarSenhaCadastrar');
+            
+            btnCadastrar.addEventListener('click', e => {
+                const emailCadastrar =  txtEmailCadastrar.value;
+                const senhaCadastrar =  txtSenhaCadastrar.value;
+                const nomeCadastrar = txtNomeCadastrar.value;
+                const confirmarSenha = txtConfirmarSenhaCadastrar.value;
+                
+                if(emailCadastrar != "" && senhaCadastrar != "" && nomeCadastrar != "" && senhaCadastrar === confirmarSenha){
+                   logar.cadastrar(emailCadastrar, senhaCadastrar, nomeCadastrar);
+                }else{
+                   alert("Digite todos os campos");
+                }
+                
+                
+            });
+
+
+            
+            
+            window.addEventListener('load', function(){
+                colocarDadosCompra();
+                logar.verificarPersistencia();
+            });
+            
+        }());
+        
+        </script>
+      
+    
+    <script src="dist/jqueryjs/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="dist/popperjs/popper.js"></script>
+    <script src="dist/bootstrapjs/bootstrap.js"></script>
+  </body>
+    
+</html>

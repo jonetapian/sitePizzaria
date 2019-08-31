@@ -1,0 +1,1024 @@
+<html lang="pt">
+  <head>
+    
+    <title>Beleza Pura</title>  
+      
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="compiler/bootstrap.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link rel="stylesheet" href="compiler/styles.css">  
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">
+    <link rel="icon" href="imgs/iconePizza.png" type="image/gif">
+    <link rel="stylesheet" href="social-login.css">
+    <link href="https://fonts.googleapis.com/css?family=Port+Lligat+Slab&display=swap" rel="stylesheet">
+      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
+    <script src="firebase.js"></script>
+    <script src="Login.js"></script>
+    <script src="carrinho.js"></script>
+    
+  </head>
+    
+  <body class="d-flex flex-column h-100">
+      
+      <nav class="navbar fixed-top navbar-expand-lg navbar-light corNav shadow">
+          
+          <div class="container-fluid line">
+            
+              <a class="navbar-brand font corFont my-auto" href="#"><h4 class="my-0">Beleza Pura</h4></a>
+            
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarSite">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse " id="navBarSite">
+
+                  <ul class="navbar-nav mr-auto ml-3 ">
+                      <li class="nav-item ">
+                          <a class="nav-link font ml-3 h5 my-0" href="index.html">Inicio</a>
+                      </li>
+                      <li class="nav-item dropdown">
+                          <a class="nav-link font ml-3 h5 my-0" href="pizzas.html">Pizzas</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link font ml-3 h5 my-0" href="#">Esfihas</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link font ml-3 h5 my-0" href="porcoes.html">Fogazas e Porções</a>
+                      </li>
+
+
+                  </ul>
+                  
+                  <ul class="navbar-nav">
+                      <div class="dropdown">
+                          <li class="nav-item font">
+
+                              <img src="imgs/perfil.png" class="" id="dropdownPerfil" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" style="width: 40px; height: 40px; cursor: pointer;">
+                              <div class="dropdown-menu dropdown-menu-right" aria-laballedby="dropdownPerfil">
+                                  <a href="#" class="dropdown-item" data-toggle="modal" data-target="#divModal" id="btnMenuLogin" disabled>Fazer Login</a>
+                                  <a href="#" class="dropdown-item" data-toggle="modal" data-target="#divModalCadastrar" id="btnMenuCadastro">Cadastrar-se</a>
+                                  <div class="dropdown-divider"></div>
+                                  <a href="#" class="dropdown-item" onclick="logout()" id="btnMenuSair">Sair</a>
+                              </div>
+                          </li>  
+                      </div>
+                      
+                  </ul>
+                  
+              </div>
+          </div>
+      
+      </nav>
+      
+      <div class="botaoFlutuante border border-light" data-toggle="modal" data-target="#modalCarrinho">
+          <img src="imgs/carrinho.png" class="carrinhoFlutuante" >
+      
+      </div>
+    
+      <div class="container-fluid" style="margin-top: 76px;">
+          
+          <div class="row float-right col-lg-10 mb-4 paddingZero">
+              <div class="card col-12 p-0 row border border-dark">
+                  <h1 class="card-header text-center font corFont"><b>Pacotes de Esfihas</b></h1>
+                  <div class="row no-gutters">
+                      <div class="col-md-4">
+                          <img src="imgs/pacoteEsfiha.png" class="card-img col-12 p-0 border-right" style="height: 275px">
+                      </div>
+                      <div class="col-md-8 py-2">
+                          
+                          <div class="card-body text-center fontTexto">
+                              
+                              
+                              <div class="float-left border-right border-dark divPacote py-2">
+                                  <h4 class="card-title font corFont" id="nomePacote1">Pacote 1</h4>
+                                  <p class="card-subtitle mb-2 h6" id="quantidadePacote1">06 Esfihas</p>
+                                   <p class="card-text"><label id="carnePacote1">02 Carne</label> <br><label id="queijoPacote1"> 02 Queijo</label> <br><label id="calabresaPacote1"> 02 Calabresa</label></p>
+                                  <button class="btn corNav text-warning" value="1" onclick="comprarPacote(this.value)">R$10,00</button>
+                              </div>
+                              
+                              
+                              <div class="float-left border-right border-dark divPacote py-2">
+                                  <h4 class="card-title font corFont" id="nomePacote2">Pacote 2</h4>
+                                  <p class="card-subtitle mb-2 h6" id="quantidadePacote2">15 Esfihas</p>
+                                  <p class="card-text"><label id="carnePacote2">05 Carne</label><br><label id="queijoPacote2">05 Queijo</label><br><label id="calabresaPacote2">05 Calabresa</label>    </p>
+                                  <button class="btn corNav text-warning" value="2" onclick="comprarPacote(this.value)"  >R$20,00</button>
+                              </div>
+                              <div class="float-left border-right border-dark divPacote py-2">
+                                  <h4 class="card-title font corFont" id="nomePacote3">Pacote 3</h4>
+                                  <p class="card-subtitle mb-2 h6" id="quantidadePacote3">15 Esfihas</p>
+                                  <p class="card-text"><label id="carnePacote3">05 Carne</label> <br> <label id="queijoPacote3">05 Queijo</label>   <br><label id="calabresaPacote3">05 Frango Catupiry</label> </p>
+                                  <button class="btn corNav text-warning" value="3" onclick="comprarPacote(this.value)">R$25,00</button>
+                              </div>
+                              <div class="float-left border-right border-dark divPacote py-2">
+                                  <h4 class="card-title font corFont" id="nomePacote4">Pacote 4</h4>
+                                  <p class="card-subtitle mb-2 h6" id="quantidadePacote4">30 Esfihas</p>
+                                  <p class="card-text"><label id="carnePacote4">10 carne</label><br><label id="queijoPacote4">10 queijo</label>   <br><label id="calabresaPacote4">10 Calabresa</label> </p>
+                                  <button class="btn corNav text-warning" value="4" onclick="comprarPacote(this.value)">R$40,00</button>
+                              </div>
+                              <div class="float-left border-dark divPacote py-2">
+                                  <h4 class="card-title font corFont" id="nomePacote5">Pacote 5</h4>
+                                  <p class="card-subtitle mb-2 h6" id="quantidadePacote5">40 Esfihas</p>
+                                  <p class="card-text"><label id="carnePacote5">20 Carne</label> <br> <label id="queijoPacote5">10 Queijo</label>  <br><label id="calabresaPacote5">10 Calabresa</label> </p>
+                                  <button class="btn corNav text-warning" onclick="comprarPacote(this.value)" value="5">R$50,00</button>
+                              </div>
+                              
+                          </div>
+                          
+                      </div>
+                      
+                  </div>
+              </div>
+          </div>
+          
+          <div class="card col-lg-2 bg-light py-2 mb-2 border rounded border-dark float-left position-fixed fontTexto" id="divFiltro" style="z-index: 1000">
+              <form>
+                  <h3 class="card-title font corFont">Filtros</h3>
+                  <h5 class="card-subtitle">Ingredientes:</h5>
+                  <ul class="p-0">
+                      
+                      <li class="form-check m-1 form-check-inline">
+                          <input id="checkMussarela" name="filtroDetalhe" value="mussarela" type="checkbox" class="form-check-input ">
+                          <label for="checkMussarela" class="form-check-label">Mussarela</label>
+                      </li>
+                      <li class="form-check m-1 form-check-inline">
+                          <input id="checkCalabresa" name="filtroDetalhe" value="calabresa" type="checkbox" class="form-check-input">
+                          <label for="checkCalabresa" class="form-check-label">Calabresa</label>
+                      </li>
+                      <li class="form-check m-1 form-check-inline">
+                          <input id="checkFrango" name="filtroDetalhe" value="frango" type="checkbox" class="form-check-input">
+                          <label for="checkFrango" class="form-check-label">Frango</label>
+                      </li>
+                      
+                      <li class="form-check m-1 form-check-inline">
+                          <input id="checkCatupiry" name="filtroDetalhe" value="catupiry" type="checkbox" class="form-check-input">
+                          <label for="checkCatupiry" class="form-check-label">Catupiry</label>
+                      </li>
+                      
+                      <li class="form-check m-1 form-check-inline">
+                          <input id="checkMilho" name="filtroDetalhe" value="milho" type="checkbox" class="form-check-input">
+                          <label for="checkMilho" class="form-check-label">Milho</label>
+                      </li>
+                      <li class="form-check m-1 form-check-inline">
+                          <input id="checkAtum" name="filtroDetalhe" value="atum" type="checkbox" class="form-check-input">
+                          <label for="checkAtum" class="form-check-label">Atum</label>
+                      </li>
+                      <li class="form-check m-1 form-check-inline">
+                          <input id="checkCarne" name="filtroDetalhe" value="carne" type="checkbox" class="form-check-input">
+                          <label for="checkCarne" class="form-check-label">Carne</label>
+                      </li>
+                  </ul>
+                  <h5>Preços:</h5>
+                  <div class="row col-12">
+                      <div class="form-check form-check-inline">
+                          <input id="check20" type="checkbox" name="filtroPreco" value="2" class="form-check-input">
+                          <label class="form-check-label" for="check20">R$2,00</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                          <input id="check25" type="checkbox" name="filtroPreco" value="3" class="form-check-input">
+                          <label class="form-check-label" for="check25">R$3,00</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                          <input id="check28" type="checkbox" name="filtroPreco" value="4" class="form-check-input">
+                          <label class="form-check-label" for="check28">R$4,00</label>
+                      </div>
+                      
+                  </div>
+                  <h5>Tipo:</h5>
+                  <div class="row col-12">
+                      <div class="form-check form-check-inline" >
+                          <input id="checkSalgada" type="checkbox" name="filtroTipo" value="salgado" class="form-check-input" onclick="tipo(this)">
+                          <label class="form-check-label" for="checkSalgada">Salgada</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                          <input id="checkDoce" type="checkbox" name="filtroTipo" value="doce" class="form-check-input" onclick="tipo(this)">
+                          <label class="form-check-label" for="checkDoce">Doce</label>
+                      </div>
+                  </div>
+                  <input type="button" class="btn btn-dark col-12 mt-3" onclick="btnFiltrar()" value="Filtrar">
+              </form>
+          </div>
+          
+          
+          
+          <div class="row float-right col-lg-10 paddingZero">
+              
+              <div class="col-12 row mb-5 border border-dark rounded fundoTransparencia" id="divEsfihas">
+                  <h1 class="text-center my-3 font col-12 corFont"><b>Esfihas</b></h1>
+              </div>
+          
+          </div>
+          
+          <div class="row float-right col-lg-10 paddingZero">
+              
+              <div class="col-12 row mb-5 border border-dark rounded fundoTransparencia" id="divEsfihasDoce">
+                  <h1 class="text-center my-3 font col-12 corFont"><b>Esfihas Doce</b></h1>
+              </div>
+          </div>
+          
+      
+      </div>
+      
+      
+    <footer class="footer mt-auto mb-0 corNav border-top">
+      
+        <div class="container-fluid text-center">
+              
+            <div class="row font corFont">
+                  
+                <div class="col-md-4 p-2 border-bottom">
+
+                    <p class="h5">Pizzaria Beleza Pura</p>
+                    <p class="h5">Rua Camuengo, Nº204, AE. Carvalho</p>
+
+                </div>
+
+                <div class="col-md-4 p-2 border-bottom">
+                      
+                    <p class="h5">Email: pizzariabelezapura12@gmail.com</p>
+                    <p class="h5">WhatsApp: (11) 98142-3024</p>
+
+                </div>
+
+                <div class="col-md-4 p-2 border-bottom">
+
+                    <p class="h5">Horário de Atendimento</p>
+                    <p class="h5">Terça a Quinta e Domingo: 19:00 - 00:00hrs</p>
+                    <p class="h5">Sexta e Sábado: 19:00 - 01:00hrs</p>
+                      
+                </div>
+            </div>
+              
+
+        </div>
+    </footer>
+      <!-- MODAIS -->
+      
+      <div class="modal fade" id="divModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font" id="exampleModalLabel">Fazer login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="caixa-email" class="col-form-label font">Email:</label>
+                            <input type="email" id="txtEmail" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="caixa-senha" class="col-form-label font">Senha:</label>
+                            <input type="password" id="txtSenha" class="form-control">
+                        </div>
+                        
+                    </form>
+                </div>
+                <div class="modal-footer font">
+                    <a href="#" class="mr-auto text-danger" data-toggle="modal" data-target="#divModalCadastrar" data-dismiss="modal">Cadastrar-se</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" id="btnLogin" class="btn btn-danger">Entrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <div class="modal fade" id="divModalCadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h5 class="modal-title font corFont " id="exampleModalLabel">Fazer cadastro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="caixa-cep" class="col-form-label font">CEP:</label>
+                            <input name="cep" type="text" id="cep" class="form-control" onkeypress="$(this).mask('00000-000')" placeholder="00000-000">
+                        
+                        </div>
+                        <div class="form-group p-1">
+                            <label for="txtNomeCadastrar" class="col-form-label font">Nome:</label>
+                            <input type="text" id="txtNomeCadastrar" class="form-control" required>
+                        </div>
+                        <div class="form-group p-1">
+                            <label for="txtEmailCadastrar" class="col-form-label font">Email:</label>
+                            <input type="email" id="txtEmailCadastrar" class="form-control">
+                        </div>
+                        <div class="form-group col-6 float-left p-1">
+                            <label for="txtSenhaCadastrar" class="col-form-label font">Senha:</label>
+                            <div class="input-group">
+                                <input type="password" id="txtSenhaCadastrar" class="form-control border-right-0">
+                                <div class="input-group-append ">
+                                    <div class="btn btn-outline-secondary form-control border border-dark "><img src="imgs/mostrarSenha.png" id="showPassword" value="show" height="25px"/></div>
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="form-group col-6 float-left p-1">
+                            <label for="txtConfirmarSenhaCadastrar" class="col-form-label font">Confirmar senha:</label>
+                            <input type="password" id="txtConfirmarSenhaCadastrar" class="form-control">
+                        </div>
+                        
+                        
+                    </form>
+                </div>
+                <div class="modal-footer font">
+                    
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnCadastrar" class="btn btn-danger">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+      <div class="modal fade" id="modalCarrinho" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font" id="exampleModalLabel">Carrinho</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <table class="table mb-0">
+                    <thead class="fontTexto bg-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Item</th>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Preço</th>
+                            <th scope="col">Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="pizzaCarrinho" class="fontTexto text-dark">
+                        
+                    </tbody>
+                    <tr class="fontTexto bg-light">
+                        <td colspan="4" >Total:</td>
+                        <td colspan="2" id="totalCarrinho"></td>
+                    </tr>
+                </table>
+                <!--<div id="pizzaCarrinho"></div>-->
+                
+                
+                <div class="modal-footer font">
+                    
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnFinalizarCompra" class="btn btn-danger" data-dismiss="modal">Finalizar compra</button>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+      <div class="modal fade" id="modalComprar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header font">
+                    Finalizando sua compra !
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="caixa-email" class="col-form-label fontTexto" id="lblPizza"></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="fontTexto">Coloque a quantidade - </label>
+                            <input type="number" id="quantidade" style="height: 20px;" name="tentacles" value="1" min="1" max="10">
+                        </div>
+
+                        <label class="fontTexto">Selecione se quiser um dos ingredientes extras por apenas R$ 3,00  :</label>
+                        <div class="form-group">
+                            <input type="checkbox" name="ingredienteExtra" id="ingredienteExtraErvilha" value="ervilha" >
+                            <label class="fontTexto form-check-inline" for="ingredienteExtraErvilha">Ervilha</label>
+                            
+                            <input type="checkbox" name="ingredienteExtra" id="ingredienteExtraMilho" value="milho" >
+                            <label class="fontTexto form-check-inline" for="ingredienteExtraMilho">Milho</label>
+                            
+                            <input type="checkbox" name="ingredienteExtra" id="ingredienteExtraPalmito"  value="palmito">
+                            <label class="fontTexto form-check-inline" for="ingredienteExtraPalmito">Palmito</label>
+                            
+                            <input type="checkbox" name="ingredienteExtra" id="ingredienteExtraOvo" value="ovo">
+                            <label class="fontTexto form-check-inline" for="ingredienteExtraOvo">Ovo</label>
+                            
+                            <input type="checkbox" name="ingredienteExtra" id="ingredienteExtraParmesao" value="parmesao">
+                            <label class="fontTexto form-check-inline" for="ingredienteExtraParmesao">Parmesão</label>
+                            <br>
+                            
+                            <input type="checkbox" name="ingredienteExtra" id="ingredienteExtraProvolone" value="provolone">
+                            <label class="fontTexto form-check-inline" for="ingredienteExtraProvolone">Provolone</label>
+                            
+                            <input type="checkbox" name="ingredienteExtra" id="ingredienteExtraBacon" value="bacon">
+                            <label class="fontTexto form-check-inline" for="ingredienteExtraBacon">Bacon</label>
+                            
+                            
+                        </div>
+                        <label class="fontTexto">Selecione se quiser um dos ingredientes extras por apenas R$ 5,00  :</label>
+                        <div class="form-group">
+                            <input type="checkbox" name="ingredienteExtra" id="ingredienteExtraCatupiry" value="catupiry">
+                            <label class="fontTexto form-check-inline" for="ingredienteExtraCatupiry">Catupiry</label>
+                            
+                            <input type="checkbox" name="ingredienteExtra" id="ingredienteExtraCheddar" value="cheddar" >
+                            <label class="fontTexto form-check-inline" for="ingredienteExtraCheddar">Cheddar</label>
+                            
+                            <input type="checkbox" name="ingredienteExtra" id="ingredienteExtraCalabresa" value="calabresa" >
+                            <label class="fontTexto form-check-inline" for="ingredienteExtraCalabresa">Calabresa</label>
+                            
+                            <input type="checkbox" name="ingredienteExtra" id="ingredienteExtraPresunto" value="presunto">
+                            <label class="fontTexto form-check-inline" for="ingredienteExtraPresunto">Presunto</label>
+                            
+                            <input type="checkbox" name="ingredienteExtra" id="ingredienteExtraFrango" value="frango">
+                            <label class="fontTexto form-check-inline" for="ingredienteExtraFrango">Frango</label>
+
+                        </div>
+                        
+
+                        <div class="form-group">
+                            <button type="button" id="btnAddCarrinho" href="#" placeholder="Adicionar carrinho" class="form-control" onclick="adicionarCarrinho()" data-dismiss="modal">Adicionar ao carrinho</button>
+                        </div>
+                       <div class="form-group">
+                            <button type="button" id="btnFinalizarCompra" href="#" placeholder="Finalizar compra" class="form-control" onclick="pegarDadosCompra()">Finalizar a compra</button>
+                        </div>
+                     
+                       
+                        
+                        
+                    </form>
+                </div>
+            </div>
+          </div>
+      </div>
+      
+      <div class="modal fade" id="modalPizza" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font" id="exampleModalLabel">Cadastrar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="caixa-cep" class="col-form-label font">Nome:</label>
+                            <input type="text" id="txtNome" class="form-control">
+                        
+                        </div>
+                        <div class="form-group">
+                            <label for="caixa-email" class="col-form-label font">Valor:</label>
+                            <input type="text" id="txtValor" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="caixa-email" class="col-form-label font">Tipo:</label>
+                            <input type="text" id="txtTipo" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="caixa-senha" class="col-form-label font">Detalhes:</label>
+                            <input type="text" id="txtDetalhes" class="form-control">
+                        </div>
+                        
+                        
+                        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                    <button type="button" id="btnAdicionarEsfiha" class="btn btn-primary" data-dismiss="modal">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+      <script type="text/javascript">
+          
+            var vCarrinho = new carrinho();
+          
+            function adicionarCarrinho(){
+            
+                vCarrinho.adicionarEsfihaCarrinho();
+
+            }
+          
+            function comprar(id){
+
+                 var details = document.getElementById(id + '#').innerHTML.replace("Detalhes: ", "").replace(" e ",",").replace(".","" ).replace(" com ", ",");
+                 document.getElementById('lblPizza').innerHTML = "Sabor - " + id.replace("%"," ") ;
+
+
+            }
+            function pegarDadosCompra(){
+
+
+                var sabor = document.getElementById('lblPizza').innerHTML.replace("Sabor - ","").replace(/ /g,"1");
+                var x = document.getElementById('lblPizza').innerHTML.replace("Sabor - ","").replace(/ /g,"%");
+                var tamanhoEX = document.getElementById(x+'2').innerHTML;
+                var tamanho = tamanhoEX.substr(8);
+
+                var ingredientesExtra = document.querySelectorAll('input[name="ingredienteExtra"]:checked');
+
+                var borda = "Sem1borda";
+
+                var str;
+                var str2;
+
+                var strIngrediente = "%Sem1Especificacoes";    
+
+                if(str2 != null){
+                    var strIngredienteExtra = "%" +     str2.replace("undefined","");
+                }
+                else{
+                    var strIngredienteExtra = "%Sem1Extras";    
+                }
+                var quantidade = document.getElementById("quantidade").value;
+                var link = btoa(sabor+ "%" + "e"+ tamanho  +"%"+quantidade + strIngrediente + "%" + borda +   strIngredienteExtra);
+                location.assign("compra.html?" + link);
+            }
+            
+            function comprarPacote(value){
+           
+            
+                var nome = document.getElementById("nomePacote" + value).innerHTML;
+                var quan = document.getElementById("quantidadePacote" + value).innerHTML;
+                var strCarne = document.getElementById("carnePacote"+value).innerHTML;
+                var esfCarne = strCarne.substring(3);
+                var quanCarne = strCarne.substr(0,3);
+               
+              
+                var strQueijo = document.getElementById("queijoPacote"+value).innerHTML;
+                var esfQueijo = strQueijo.substring(3);
+                var quanQueijo = strQueijo.substr(0,3);
+              
+                var strCalabresa = document.getElementById("calabresaPacote"+value).innerHTML;
+                var esfCalabresa = strCalabresa.substring(3);
+                var quanCalabresa = strCalabresa.substr(0,3);
+                
+                var tamanho = "2,00";
+                var borda = "Sem1Borda";
+                var strIngrediente = "Sem1Especificacoes";   
+                var strIngredienteExtra = "%Sem1Extras"; 
+                var link = btoa(esfCarne + "$" + esfQueijo + "$" + esfCalabresa + "%" + "p"+ value + tamanho  +"%" + parseFloat(quanCarne)+ "$"+ parseFloat(quanQueijo)+ "$" + parseFloat(quanCalabresa) + "%" +  strIngrediente + "%" + borda +   strIngredienteExtra);
+                location.assign("compra.html?" + link);
+               
+               
+            }
+          
+            function tipo(obj){
+                
+                if (obj.id == 'checkDoce'){
+                    if(obj.checked == true){
+                        
+                        var habilitador = document.getElementsByName('filtroDetalhe');
+                        var i;
+                        for(i = 0; i < habilitador.length; i++){
+                            habilitador[i].disabled = true;
+                            habilitador[i].checked = false;
+                        }
+                    }else{
+                        var habilitador = document.getElementsByName('filtroDetalhe');
+                        var i;
+                        for(i = 0; i < habilitador.length; i++){
+                            habilitador[i].disabled = false;
+
+                        }
+                    }
+                }
+                
+                
+            }
+          
+            function tipo(obj){
+                
+                if (obj.id == 'checkDoce'){
+                    if(obj.checked == true){
+                        
+                        var habilitador = document.getElementsByName('filtroDetalhe');
+                        var i;
+                        for(i = 0; i < habilitador.length; i++){
+                            habilitador[i].disabled = true;
+                            habilitador[i].checked = false;
+                        }
+                    }else{
+                        var habilitador = document.getElementsByName('filtroDetalhe');
+                        var i;
+                        for(i = 0; i < habilitador.length; i++){
+                            habilitador[i].disabled = false;
+
+                        }
+                    }
+                }
+                
+                
+            }
+
+            function btnFiltrar(){
+                var filtroDetalhes = document.querySelectorAll('[name=filtroDetalhe]:checked');
+                var filtroPreco = document.querySelectorAll('[name=filtroPreco]:checked');
+                var filtroTipo = document.querySelectorAll('[name=filtroTipo]:checked');
+                var valueDetalhes = [];
+                var valuePreco = [];
+                var valueTipo = [];
+                var i;
+                for(i = 0; i < filtroDetalhes.length; i++){
+                    if(filtroDetalhes[i].checked){
+                        valueDetalhes.push(filtroDetalhes[i].value);
+                    }
+                }
+                for(i = 0; i < filtroPreco.length; i++){
+                    if(filtroPreco[i].checked){
+                        valuePreco.push(filtroPreco[i].value);  
+                    }
+                }
+                for(i = 0; i < filtroTipo.length; i++){
+                    if(filtroTipo[i].checked){
+                        valueTipo.push(filtroTipo[i].value);
+                        
+                    }
+                }
+                
+                var detalhesString = valueDetalhes.toString().split(",");
+                var precoString = valuePreco.toString().split(",");
+                var tipoString = valueTipo.toString();
+                
+                document.getElementById('divEsfihas').innerHTML = '<h1 class="text-center my-3 font col-12"><b>Esfihas</b></h1>';
+                document.getElementById('divEsfihasDoce').innerHTML = '<h1 class="text-center my-3 font col-12"><b>Esfihas Doce</b></h1>';
+                var ref = firebase.database().ref('esfihas/').orderByChild("valor").startAt(precoString[0]);
+                return ref.once('value').then(function(snapshot){
+
+                    snapshot.forEach(function(childSnapshot){
+
+                        if(snapshot.exists){
+                            const obj = Object.values(childSnapshot.val());
+                            var ingredientesSeparados = obj[0].replace(/ e /g, ",").replace(/ com /g, ",").replace(/ ou /g, ",").replace(/ /g, ",").replace(/,+/g, ",").toLowerCase().split(",");
+                            var valorPizza = obj[3];
+                            console.log(ingredientesSeparados);
+                            var i;
+                            var ingredientes1 = [];
+                            for(i = 0; i < ingredientesSeparados.length; i++){
+                                
+                                var a;
+                                
+                                for(a = 0; a < detalhesString.length; a++){
+                                    
+                                    if(ingredientesSeparados[i] == detalhesString[a]){
+                                        
+                                        ingredientes1.push(ingredientesSeparados[i]);
+                                        ingredientes1 = ingredientes1.sort();
+                                    }
+                                    
+                                    var ingredientes2 = valueDetalhes.sort().toString();
+                                    
+                                    if(detalhesString != "" && precoString != ""){
+                                        
+                                        if((ingredientes1 == ingredientes2) && (valorPizza == precoString[0] || valorPizza == precoString[1] || valorPizza == precoString[2])){
+                                        
+                                            if(obj[2] == "salgado"){
+                                                
+                                                const card = cardPizza.pizza(obj);
+
+                                                document.getElementById('divEsfihas').innerHTML += card;
+                                            }else{
+                                                
+                                                const card = cardPizza.pizza(obj);
+
+                                                document.getElementById('divEsfihasDoce').innerHTML += card;
+                                            }
+                                            i = 100;
+                                            break;
+
+                                        }
+                                    }else if(detalhesString != ""){
+                                        
+                                        if((ingredientes1 == ingredientes2)){
+                                        
+                                            if(obj[2] == "salgado"){
+                                                
+                                                const card = cardPizza.pizza(obj);
+
+                                                document.getElementById('divEsfihas').innerHTML += card;
+                                            }else{
+                                                
+                                                const card = cardPizza.pizza(obj);
+
+                                                document.getElementById('divEsfihasDoce').innerHTML += card;
+                                            }
+                                            i = 100;
+                                            break;
+
+                                        }
+                                    }else if(tipoString == "doce" && precoString != ""){
+                                        if((obj[2] == "doce") && (valorPizza == precoString[0] || valorPizza == precoString[1] || valorPizza == precoString[2] || valorPizza == precoString[3])){
+                                            console.log("bola");
+                                            const card = cardPizza.pizza(obj);
+
+                                            document.getElementById('divEsfihasDoce').innerHTML += card;
+                                        }
+                                        i = 100;
+                                        break;
+
+                                    }else if(tipoString == "doce"){
+                                        if(obj[2] == "doce"){
+                                           const card = cardPizza.pizza(obj);
+
+                                            document.getElementById('divEsfihasDoce').innerHTML += card;
+                                        }
+
+                                        i = 100;
+                                        break;
+                                    }else if(tipoString == "salgado" && precoString != ""){
+                                        if((obj[2] == tipoString) && (valorPizza == precoString[0] || valorPizza == precoString[1] || valorPizza == precoString[2] || valorPizza == precoString[3])){
+                                            const card = cardPizza.pizza(obj);
+
+                                            document.getElementById('divEsfihas').innerHTML += card;
+                                        }
+                                        i = 100;
+                                        break;
+                                    }else if(tipoString == "salgado"){
+                                        if(obj[2] == "salgado"){
+                                            const card = cardPizza.pizza(obj);
+
+                                            document.getElementById('divEsfihas').innerHTML += card;
+                                        }
+
+                                        i = 100;
+                                        break;
+                                    }else if(precoString != ""){
+
+                                        if((valorPizza == precoString[0] || valorPizza == precoString[1] || valorPizza == precoString[2] || valorPizza == precoString[3])){
+
+                                            if(obj[2] == "salgado"){
+
+                                                const card = cardPizza.pizza(obj);
+
+                                                document.getElementById('divEsfihas').innerHTML += card;
+                                            }else{
+
+                                                const card = cardPizza.pizza(obj);
+
+                                                document.getElementById('divEsfihasDoce').innerHTML += card;
+                                            }
+                                            i = 100;
+                                            break;
+
+                                        }
+                                    }else{
+                                        if(obj[2] == "salgado"){
+
+                                                const card = cardPizza.pizza(obj);
+
+                                                document.getElementById('divEsfihas').innerHTML += card;
+                                            }else{
+
+                                                const card = cardPizza.pizza(obj);
+
+                                                document.getElementById('divEsfihasDoce').innerHTML += card;
+                                            }
+                                            i = 100;
+                                            break;
+                                    }
+                                    
+                                    
+                                    
+                                }
+                                
+                            }
+                            
+                     
+                        }else{
+                            console.log("erro doc");
+                        }
+                    });
+
+                    
+
+                });
+                
+            }
+
+        function logout(){
+
+            firebase.auth().signOut().then(function(){
+                localStorage.removeItem("email");
+                window.location.reload(true);
+            }).catch(function(error){
+
+            });
+
+        }
+
+        (function(){   
+                
+            var teste = localStorage.getItem("email");
+            console.log(teste);
+            if(teste){
+                const btnMenuLogin = document.getElementById('btnMenuLogin');
+                const btnMenuCadastrar = document.getElementById('btnMenuCadastro');
+                btnMenuLogin.classList.add("disabled");
+                btnMenuCadastrar.classList.add("disabled");
+            }else{
+                const btnMenuSair = document.getElementById('btnMenuSair');
+                btnMenuSair.classList.add("disabled");
+            }
+            
+            const txtEmail = document.getElementById('txtEmail');
+            const txtSenha = document.getElementById('txtSenha');
+            const btnLogin = document.getElementById('btnLogin');
+            var logar;
+            logar = new Login();
+
+            btnLogin.addEventListener('click', e => {
+                
+                const emailLogin = txtEmail.value;
+                const senhaLogin = txtSenha.value;
+                
+                btnLogin.addEventListener("teste", function(e){
+
+                    logar.logar(emailLogin, senhaLogin);
+                    
+                    
+                }, false);
+
+                var event = new CustomEvent("teste", {detail: {beleza: true}}); 
+
+                btnLogin.dispatchEvent(event);
+                
+                logar.verificarPersistencia();
+                var url = window.location.href;
+                console.log(url);
+                
+                
+            });
+            
+            const txtEmailCadastrar = document.getElementById('txtEmailCadastrar');
+            const txtSenhaCadastrar = document.getElementById('txtSenhaCadastrar');
+            const btnCadastrar = document.getElementById('btnCadastrar');
+            const txtNomeCadastrar = document.getElementById('txtNomeCadastrar');
+            const txtConfirmarSenhaCadastrar = document.getElementById('txtConfirmarSenhaCadastrar');
+            
+            btnCadastrar.addEventListener('click', e => {
+                const emailCadastrar =  txtEmailCadastrar.value;
+                const senhaCadastrar =  txtSenhaCadastrar.value;
+                const nomeCadastrar = txtNomeCadastrar.value;
+                const confirmarSenha = txtConfirmarSenhaCadastrar.value;
+                
+                if(emailCadastrar != "" && senhaCadastrar != "" && nomeCadastrar != "" && senhaCadastrar === confirmarSenha){
+                   logar.cadastrar(emailCadastrar, senhaCadastrar, nomeCadastrar);
+                }else{
+                   alert("Digite todos os campos");
+                }
+                
+                
+            });
+            
+            window.addEventListener('load', function(){
+
+                logar.verificarPersistencia();
+            });
+            
+            const database = firebase.database();
+
+            const txtNomeEsfiha = document.getElementById('txtNome');
+            const txtValor = document.getElementById('txtValor');
+            const txtTipo = document.getElementById('txtTipo');
+            const txtDetalhes = document.getElementById('txtDetalhes');
+
+
+            const btnAdicionarEsfiha = document.getElementById('btnAdicionarEsfiha');
+
+
+            btnAdicionarEsfiha.addEventListener('click', e => {
+
+
+                const id = txtNomeEsfiha.value;
+
+                const nomeEsfiha = txtNomeEsfiha.value;
+                const valor = txtValor.value;
+                const detalhes = txtDetalhes.value;
+                const tipo = txtTipo.value;
+
+                firebase.database().ref('esfihas/' + id).set({
+
+                    nome: nomeEsfiha,
+                    valor: valor,
+                    detalhes: detalhes,
+                    tipo: tipo
+
+                }).then(function(docRef){
+
+                    console.log(nomeEsfiha);
+
+                }).catch(function(error){
+                    console.error(error);
+                });
+
+            });
+                
+                
+            window.addEventListener('load', function(){
+                
+                vCarrinho.recuperarCarrinho();
+                
+                var logar;
+                logar = new Login();
+                //logar.recuperarEmail();
+
+                return firebase.database().ref('esfihas/').once('value').then(function(snapshot){
+
+                    snapshot.forEach(function(childSnapshot){
+
+                        if(snapshot.exists){
+
+                            const obj = Object.values(childSnapshot.val());
+
+
+                            if(obj[2] == "salgado"){
+
+                                const card = cardPizza.pizza(obj);
+
+                                document.getElementById('divEsfihas').innerHTML += card;
+                            }else{
+
+                                const card = cardPizza.pizza(obj);
+
+                                document.getElementById('divEsfihasDoce').innerHTML += card;
+                            }
+
+                        }else{
+                            console.log("erro doc");
+                        }
+                    });
+
+                    //console.log(teste);
+
+                });
+            });
+
+        }());
+
+        var cardPizza = {
+            pizza(obj){
+                //<img src="imgs/esfihas/' + obj[1] + '.png" height="150px">
+                return ['<div class="col-md-6 col-lg-4"> <div class="card mb-3 border border-dark shadow fontTexto">    <div class="card-body py-2"> <h4 class="card-title font">' + obj[1] + '</h4> <h6 class="card-subtitle text-muted mb-2" id="'+obj[1].replace(" ","%")+'2" >Valor R$' + obj[3] + ',00</h6> <p class="card-text " id="'+obj[1].replace(" ","%")+'#">Detalhes: ' + obj[0] + '.</p> <a href="#" class="card-link text-danger" id="'+obj[1].replace(" ","%")+'" onclick="comprar(this.id)" data-toggle="modal" data-target="#modalComprar" >Comprar</a>  </div> </div> </div>'];
+            }
+        }
+        
+        var corpoCarrinho = {
+            corpo(pizzaCarrinho, i){
+                return ['<tr><td>' + (i + 1) + '</td><td>' + pizzaCarrinho[0] + '</td><td>' + pizzaCarrinho[1] + '</td><td>R$' + pizzaCarrinho[2] + ',00</td><td>R$' + (pizzaCarrinho[1] * pizzaCarrinho[2]) + ',00</td><td id="' + i + ' " onclick="removerLista(this.id)" style="cursor:pointer;">&times;</td></tr>']
+            }
+        }
+        
+        function removerLista(id){
+            vCarrinho.removerCarrinho(id);   
+        }
+          
+          $(document).ready(function(){
+ 
+          $('#showPassword').on('click', function(){
+           
+            var passwordField = $('#txtSenhaCadastrar');
+            
+            var passwordFieldType = passwordField.attr('type');
+            
+            if(passwordFieldType == 'password'){
+                
+                passwordField.attr('type', 'text');
+                $(this).val('Hide');
+                
+            }else{
+                
+                passwordField.attr('type', 'password');
+                $(this).val('Show');
+                
+            }
+          });
+        });
+        
+    </script>
+      
+    <script src="dist/jqueryjs/jquery.js"></script>
+    <script src="dist/popperjs/popper.js"></script>
+    <script src="dist/bootstrapjs/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+      
+  </body>
+    
+</html> 

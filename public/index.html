@@ -1,0 +1,556 @@
+<html lang="pt">
+  <head>
+    
+    <title>Beleza Pura</title>  
+      
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="compiler/bootstrap.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link rel="stylesheet" href="compiler/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">
+    <link rel="stylesheet" href="social-login.css">
+    <link rel="icon" href="imgs/iconePizza.png" type="image/gif"> 
+    <link href="https://fonts.googleapis.com/css?family=Port+Lligat+Slab&display=swap" rel="stylesheet">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>  
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
+    <script src="firebase.js"></script>
+    <script src="Login.js"></script>
+    <script src="carrinho.js"></script>
+      
+  </head>
+    
+  <body class="d-flex flex-column h-100">
+      
+      <nav class="navbar fixed-top navbar-expand-lg navbar-light corNav shadow">
+          
+          <div class="container-fluid line">
+            
+              <a class="navbar-brand font corFont my-auto"><h4 class="my-0">Beleza Pura</h4></a>
+            
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarSite">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse " id="navBarSite">
+
+                  <ul class="navbar-nav mr-auto ml-3 ">
+                      <li class="nav-item ">
+                          <a class="nav-link font ml-3 h5 my-0" href="#">Inicio</a>
+                      </li>
+                      <li class="nav-item dropdown">
+                          <a class="nav-link font ml-3 h5 my-0" href=pizzas.html>Pizzas</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link font ml-3 h5 my-0" href="esfihas.html">Esfihas</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link font ml-3 h5 my-0" href="porcoes.html">Fogazas e Porções</a>
+                      </li>
+
+                  </ul>
+                  <div id="labelLogado"></div>
+                  <ul class="navbar-nav">
+                      <div class="dropdown">
+                          <li class="nav-item font">
+
+                              <img src="imgs/perfil.png" class="" id="dropdownPerfil" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" style="width: 40px; height: 40px; cursor: pointer;">
+                              <div class="dropdown-menu dropdown-menu-right" aria-laballedby="dropdownPerfil">
+                                  <a href="#" class="dropdown-item" data-toggle="modal" data-target="#divModal" id="btnMenuLogin" disabled>Fazer Login</a>
+                                  <a href="#" class="dropdown-item" data-toggle="modal" data-target="#divModalCadastrar" id="btnMenuCadastro">Cadastrar-se</a>
+                                  <div class="dropdown-divider"></div>
+                                  <a href="#" class="dropdown-item" onclick="logout()" id="btnMenuSair">Sair</a>
+                              </div>
+
+
+                          </li>  
+                      </div>
+                      
+                  </ul>
+                  
+                  
+             
+              </div>
+              
+              
+          </div>
+      
+      </nav>
+      
+      <div class="botaoFlutuante border border-light border-right-0" data-toggle="modal" data-target="#modalCarrinho">
+          <img src="imgs/carrinho.png" class="carrinhoFlutuante" >
+      
+      </div>
+    
+      
+    <div id="carouselSite" class="carousel slide" data-ride="carousel" style="margin-top: 56px;">
+
+          <ol class="carousel-indicators">
+              <li data-target="#carouselSite" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselSite" data-slide-to="1"></li>
+              <li data-target="#carouselSite" data-slide-to="2"></li>
+
+          </ol>
+
+          <div class="carousel-inner">
+
+              <div class="carousel-item active">
+
+                  <img src="imgs/pizza1.jpg" class="img-fluid d-block">
+
+                  <div class="carousel-caption d-none d-md-block">
+
+                      <h3>Titulo</h3>
+                      <p>Texto do titulo Texto do titulo</p>
+
+                  </div>
+
+              </div>
+
+              <div class="carousel-item ">
+
+                  <img src="imgs/pizza2.jpg" class="img-fluid d-block">
+
+                  <div class="carousel-caption d-none d-md-block">
+
+                      <h3>Titulo</h3>
+                      <p>Texto do titulo Texto do titulo</p>
+                  </div>
+
+              </div>
+
+              <div class="carousel-item ">
+
+                  <img src="imgs/batata.jpg" class="img-fluid d-block">
+
+                  <div class="carousel-caption d-none d-md-block text-left text-body h6 font ">
+
+                      <div class="fundoSlide p-1 border-left rounded">
+                          <h3 >COMBOS DE BATATA</h3>
+                          <p>Batata 1: Batata e cheddar</p>
+                          <p>Batata 2: Batata cheddar e bacon</p>
+                          <p>Batata 3: Batata cheddar e calabresa</p>
+                          <p>Batata 4: Batata cheddar bacon e calabresa</p>
+                          <p>Batata 5: Batata catupiry e bacon</p>
+                          <p>Batata 6: Batata catupiry e calabresa</p>
+                          <p>Batata 7: Batata catupiry bacon e calabresa</p>
+                          <p>Batata 8: Batata catupiry e cheddar</p>
+                          <p>Batata 9: Batata catupiry cheddar e calabresa</p>
+                          <p>Batata 10: Batata catupiry cheddar calabresa e bacon</p>
+                          <p>Batata Suprema: Batata e 4 ingredientes ao gosto do cliente</p>
+                          <button class="btn corNav text-warning" type="button">Comprar</button>
+                      </div>
+
+
+                  </div>
+
+              </div>
+
+              <a class="carousel-control-prev" href="#carouselSite" role="button" data-slide="prev">
+
+                  <span class="carousel-control-prev-icon"></span>
+                  <span class="sr-only">Anterior</span>
+              </a>
+
+              <a class="carousel-control-next" href="#carouselSite" role="button" data-slide="next">
+
+                  <span class="carousel-control-next-icon"></span>
+                  <span class="sr-only">Próximo</span>
+              </a>
+          </div>
+      </div>
+      
+    <!--<a href="testmail.php">Envie seu email!</a>-->
+    <div class="container my-4">
+          <div class="row d-flex justify-content-center fontTexto">
+              
+              <div class="col-md-6 col-lg-4">
+
+                  <div class="card border border-dark mb-3">
+
+                      <img class="cardMenu" src="imgs/imagem-promocao.png" height="150px">
+                      <div class="card-body">
+                        <h3 class="card-title font corFont">Promoção</h3>
+                        <h4 class="card-subtitle mb-2">2 Pizzas = 1 Refrigerante</h4>
+                        <p class="card-text">Na compra de 2 pizzas, ganhe um Dolly de 2L!</p>
+                        <a href="pizzas.html" class="card-link text-danger">Ver oferta</a>
+                        
+                      </div>
+                  </div>
+
+              </div>
+              
+              <div class="col-md-6 col-lg-4">
+
+                  <div class="card border border-dark mb-3">
+
+                      <img src="imgs/pizza-mussarela-calabresa.jpg" height="150px">
+                      <div class="card-body">
+                        <h3 class="card-title font corFont" >Pizza mais popular</h3>
+                        <h4 class="card-subtitle mb-2">Mussarela e Calabresa</h4>
+                        <p class="card-text">Pizza mais comprada por nossos clientes, experimente agora mesmo!</p>
+                        <a href="#" class="card-link text-danger">Comprar</a>
+                        
+                      </div>
+                  </div>
+
+              </div>
+              
+              <div class="col-md-6 col-lg-4">
+
+                  <div class="card border border-dark mb-3">
+                      
+                      <img src="imgs/fogazza.jpg" height="150px">
+                      <div class="card-body">
+                        <h3 class="card-title font corFont">Novidade</h3>
+                        <h4 class="card-subtitle mb-2">Fogazzas</h4>
+                        <p class="card-text">Qualquer sabor das pizzas por apenas R$12,00!</p>
+                        <a href="#" class="card-link text-danger">Comprar</a>
+                        
+                      </div>
+                  </div>
+
+              </div>
+              
+          </div>
+      </div>
+      
+    <div class="container ">
+          
+          <div class="row mb-4 featurette">
+          
+              <div class="col-12" name="quadroLocalização">
+                  
+                  <div class="shadow cinza-fundo border border-dark rounded p-3">
+                  
+                      <p class="text-center h3 corFont" style="font-family: 'Lobster', cursive">Nossa localização!</p>
+                
+                      <iframe class="col-12 shadow bg-white border border-dark" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.1563182935793!2d-46.4671065850713!3d-23.526879484700032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce613330bf4ccd%3A0xca4bd88b6c7a10ab!2sPizzaria+Beleza+Pura!5e0!3m2!1spt-BR!2sbr!4v1555010106928!5m2!1spt-BR!2sbr"  height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+                  </div>
+      
+              </div>
+
+              
+          </div>
+          
+          <hr class="featurette-divider">
+          
+          <div class="row mb-4 featurette bg-white mx-0 p-3 border border-dark rounded">
+              <div class="col-lg-6">
+                  
+                  <img class="border border-dark col-12 p-0" style="height: 500px;" src="imgs/fachada.png">
+                  
+              </div>
+              <div class="col-lg-6">
+                  <div class="text-justify rounded p-3">
+                  
+                      <p class="text-center h3 corFont featurette-heading" style="font-family: 'Lobster', cursive">História da pizzaria</p>
+                      <b class="lead fontTexto" id="textoHistoria">Sed ultricies lobortis risus, id pulvinar risus auctor ut. Nullam efficitur eu tellus et bibendum. Donec pharetra, turpis non rhoncus dictum, dui arcu auctor dolor, id molestie justo orci eu arcu. Mauris id magna ut velit lacinia consequat sed nec ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget velit ultrices risus ultrices malesuada et vitae orci. Donec at enim nec ante venenatis tristique non ac diam. Morbi blandit tortor id metus auctor pellentesque. Nam euismod lacus a odio tincidunt aliquet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent finibus ac purus porttitor mattis. Morbi ac placerat leo. Etiam tincidunt iaculis eros, sit amet tincidunt lacus suscipit id. Duis enim risus, blandit ac faucibus sed, congue eu est. Nullam id auctor leo.</b>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+    <footer class="footer mt-auto mb-0 corNav border-top">
+      
+        <div class="container-fluid text-center">
+              
+            <div class="row font corFont">
+                  
+                <div class="col-md-4 p-2 border-bottom">
+
+                    <p class="h5">Pizzaria Beleza Pura</p>
+                    <p class="h5">Rua Camuengo, Nº204, AE. Carvalho</p>
+
+                </div>
+
+                <div class="col-md-4 p-2 border-bottom">
+                      
+                    <p class="h5">Email: pizzariabelezapura12@gmail.com</p>
+                    <p class="h5">WhatsApp: (11) 98142-3024</p>
+
+                </div>
+
+                <div class="col-md-4 p-2 border-bottom">
+
+                    <p class="h5">Horário de Atendimento</p>
+                    <p class="h5">Terça a Quinta e Domingo: 19:00 - 00:00hrs</p>
+                    <p class="h5">Sexta e Sábado: 19:00 - 01:00hrs</p>
+                      
+                </div>
+            </div>
+              
+
+        </div>
+    </footer>
+    
+      <!-- MODAIS -->
+      
+    <div class="modal fade" id="divModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font" id="exampleModalLabel">Fazer login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="caixa-email" class="col-form-label font">Email:</label>
+                            <input type="email" id="txtEmail" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="caixa-senha" class="col-form-label font">Senha:</label>
+                            <input type="password" id="txtSenha" class="form-control">
+                        </div>
+                        
+                    </form>
+                </div>
+                <div class="modal-footer font">
+                    <a href="#" class="mr-auto text-danger" data-toggle="modal" data-target="#divModalCadastrar" data-dismiss="modal">Cadastrar-se</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" id="btnLogin" class="btn btn-danger">Entrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <div class="modal fade" id="divModalCadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h5 class="modal-title font corFont " id="exampleModalLabel">Fazer cadastro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="caixa-cep" class="col-form-label font">CEP:</label>
+                            <input name="cep" type="text" id="cep" class="form-control" onkeypress="$(this).mask('00000-000')" placeholder="00000-000">
+                        
+                        </div>
+                        <div class="form-group p-1">
+                            <label for="txtNomeCadastrar" class="col-form-label font">Nome:</label>
+                            <input type="text" id="txtNomeCadastrar" class="form-control" required>
+                        </div>
+                        <div class="form-group p-1">
+                            <label for="txtEmailCadastrar" class="col-form-label font">Email:</label>
+                            <input type="email" id="txtEmailCadastrar" class="form-control">
+                        </div>
+                        <div class="form-group col-6 float-left p-1">
+                            <label for="txtSenhaCadastrar" class="col-form-label font">Senha:</label>
+                            <div class="input-group">
+                                <input type="password" id="txtSenhaCadastrar" class="form-control border-right-0">
+                                <div class="input-group-append ">
+                                    <div class="btn btn-outline-secondary form-control border border-dark "><img src="imgs/mostrarSenha.png" id="showPassword" value="show" height="25px"/></div>
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="form-group col-6 float-left p-1">
+                            <label for="txtConfirmarSenhaCadastrar" class="col-form-label font">Confirmar senha:</label>
+                            <input type="password" id="txtConfirmarSenhaCadastrar" class="form-control">
+                        </div>
+                        
+                        
+                    </form>
+                </div>
+                <div class="modal-footer font">
+                    
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnCadastrar" class="btn btn-danger">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="modalCarrinho" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font" id="exampleModalLabel">Carrinho</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <table class="table mb-0">
+                    <thead class="fontTexto bg-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Item</th>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Preço</th>
+                            <th scope="col">Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="pizzaCarrinho" class="fontTexto text-dark">
+                        
+                    </tbody>
+                    <tr class="fontTexto bg-light">
+                        <td colspan="4" >Total:</td>
+                        <td colspan="2" id="totalCarrinho"></td>
+                    </tr>
+                </table>
+                <!--<div id="pizzaCarrinho"></div>-->
+                
+                
+                <div class="modal-footer font">
+                    
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnFinalizarCompra" class="btn btn-danger" data-dismiss="modal">Finalizar compra</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+
+        var vCarrinho = new carrinho();
+        /*var database;
+        database = firebase.database();*/
+        
+        function logout(){
+            
+            firebase.auth().signOut().then(function(){
+                localStorage.removeItem("email");
+                window.location.reload(true);
+            }).catch(function(error){
+                
+            });
+            
+        }
+        
+        (function(){
+            var teste = localStorage.getItem("email");
+            console.log(teste);
+            if(teste){
+                const btnMenuLogin = document.getElementById('btnMenuLogin');
+                const btnMenuCadastrar = document.getElementById('btnMenuCadastro');
+                btnMenuLogin.classList.add("disabled");
+                btnMenuCadastrar.classList.add("disabled");
+            }else{
+                const btnMenuSair = document.getElementById('btnMenuSair');
+                btnMenuSair.classList.add("disabled");
+            }
+            
+            const txtEmail = document.getElementById('txtEmail');
+            const txtSenha = document.getElementById('txtSenha');
+            const btnLogin = document.getElementById('btnLogin');
+            var logar;
+            logar = new Login();
+
+            btnLogin.addEventListener('click', e => {
+                
+                const emailLogin = txtEmail.value;
+                const senhaLogin = txtSenha.value;
+                
+                btnLogin.addEventListener("teste", function(e){
+
+                    logar.logar(emailLogin, senhaLogin);
+                    
+                    
+                }, false);
+
+                var event = new CustomEvent("teste", {detail: {beleza: true}}); 
+
+                btnLogin.dispatchEvent(event);
+                
+                logar.verificarPersistencia();
+                var url = window.location.href;
+                console.log(url);
+                
+                
+            });
+            
+            const txtEmailCadastrar = document.getElementById('txtEmailCadastrar');
+            const txtSenhaCadastrar = document.getElementById('txtSenhaCadastrar');
+            const btnCadastrar = document.getElementById('btnCadastrar');
+            const txtNomeCadastrar = document.getElementById('txtNomeCadastrar');
+            const txtConfirmarSenhaCadastrar = document.getElementById('txtConfirmarSenhaCadastrar');
+            
+            btnCadastrar.addEventListener('click', e => {
+                const emailCadastrar =  txtEmailCadastrar.value;
+                const senhaCadastrar =  txtSenhaCadastrar.value;
+                const nomeCadastrar = txtNomeCadastrar.value;
+                const confirmarSenha = txtConfirmarSenhaCadastrar.value;
+                
+                if(emailCadastrar != "" && senhaCadastrar != "" && nomeCadastrar != "" && senhaCadastrar === confirmarSenha){
+                   logar.cadastrar(emailCadastrar, senhaCadastrar, nomeCadastrar);
+                }else{
+                   alert("Digite todos os campos");
+                }
+                
+                
+            });
+            
+            window.addEventListener('load', function(){
+
+                logar.verificarPersistencia();
+                logar.recuperarEmail();
+                vCarrinho.recuperarCarrinho();
+            });
+            
+            
+            
+        }());
+        
+        function removerLista(id){
+            vCarrinho.removerCarrinho(id);   
+        }
+        
+        var corpoCarrinho = {
+            corpo(pizzaCarrinho, i){
+                return ['<tr><td>' + (i + 1) + '</td><td>' + pizzaCarrinho[0] + '</td><td>' + pizzaCarrinho[1] + '</td><td>R$' + pizzaCarrinho[2] + ',00</td><td>R$' + (pizzaCarrinho[1] * pizzaCarrinho[2]) + ',00</td><td id="' + i + ' " onclick="removerLista(this.id)" style="cursor:pointer;">&times;</td></tr>']
+                
+            }
+        }
+        
+        $(document).ready(function(){
+ 
+          $('#showPassword').on('click', function(){
+           
+            var passwordField = $('#txtSenhaCadastrar');
+            
+            var passwordFieldType = passwordField.attr('type');
+            
+            if(passwordFieldType == 'password'){
+                
+                passwordField.attr('type', 'text');
+                $(this).val('Hide');
+                
+            }else{
+                
+                passwordField.attr('type', 'password');
+                $(this).val('Show');
+                
+            }
+          });
+        });
+        
+    </script>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+    <script src="dist/jqueryjs/jquery.js"></script>
+    <script src="dist/popperjs/popper.js"></script>
+    <script src="dist/bootstrapjs/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>  
+        
+  </body>
+    
+</html>

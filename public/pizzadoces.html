@@ -1,0 +1,373 @@
+<html lang="pt">
+  <head>
+    
+    <title>Beleza Pura</title>  
+      
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/compiler/bootstrap.css">
+      
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+      
+    <link rel="stylesheet" href="node_modules/bootstrap/compiler/styles.css">  
+      
+    <link rel="icon" href="imgs/iconePizza.png" type="image/gif">
+      
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+      
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-firestore.js"></script>
+      
+    <script>
+
+        var config = {
+            apiKey: "AIzaSyC-IKuF7mooy-3kKFnXHBER_7nVqYTBvx4",
+            authDomain: "pizzariabelezapura-ae014.firebaseapp.com",
+            databaseURL: "https://pizzariabelezapura-ae014.firebaseio.com",
+            projectId: "pizzariabelezapura-ae014",
+            storageBucket: "pizzariabelezapura-ae014.appspot.com",
+            messagingSenderId: "255943944938"
+        };
+
+        firebase.initializeApp(config);
+
+    </script>
+
+    
+  </head>
+    
+  <body>
+      
+      <nav class="navbar sticky-top navbar-expand-lg navbar-light corNav">
+          
+          <div class="container line">
+            <!-- mudei aqui-->
+              <a class="navbar-brand mb-0 font corFont"  href="#"><h4>Beleza Pura</h4></a>
+            <!-- mudei aqui-->
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarSite">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse " id="navBarSite">
+
+                  <ul class="navbar-nav mr-auto ml-3">
+                      <li class="nav-item">
+                          <a class="nav-link font ml-3 h5 " href="index.html">Inicio</a>
+                      </li>
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle font ml-3 h5" href="#" data-toggle="dropdown" id="navbarDropdown">Pizzas</a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="pizzas.html">Pizza Salgada</a>
+                              <a class="dropdown-item">Pizza Doce</a>
+                          
+                          </div>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link font ml-3 h5 " href="#">Esfihas</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link font ml-3 h5 " href="#">Porções</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link font ml-3 h5 " href="#">Contatos</a>
+                      </li>
+
+                  </ul>
+                  
+                  <form class="form-inline">
+                  
+                      <input class="form-control col-10" type="search" placeholder="Buscar">
+                      <button class="btn btn-dark col-2" type="submit">Ok</button>
+                      
+                  </form>
+
+              </div>
+          </div>
+      
+      </nav>
+    
+      <div class="container my-4">
+          
+          <div class="row mb-5">
+              
+              <div class="col-12">
+              
+                  <h1 class="text-center font"><b>Pizzas Doces</b></h1>
+                  <form>
+                      
+                      <a class="btn btn-light" data-toggle="modal" data-target="#modalPizza">Adicionar pizza</a>
+                      
+                      <select name="orderby" class="form-control col-3 float-right">
+                          <option selected>Ordenar por</option>
+                          <option value="1">Menor preço</option>
+                          <option value="2">Maior preço</option>
+                          <option value="3">A a Z</option>
+                          
+                      
+                      </select>
+                      
+                  </form>
+              </div>
+            
+          </div>
+          
+          <div class="row mb-5" id="divPizzas">
+          
+              
+              
+          </div>
+          <div class="row mb-5">
+          
+              
+              
+          </div>
+      
+      </div>
+      
+      
+      <footer class="footer mt-auto py-3 mb-0 corNav text-light">
+      
+          <div class="container-fluid text-center">
+              
+              <div class="row">
+                  
+                  <div class="col-sm-4">
+
+                      <p class="mt-3 h5"><u>Pizzaria Beleza Pura&#169;</u></p>
+
+                  </div>
+
+                  <div class="col-sm-4">
+                      
+                      <p class="h6"><u>Email: pizzariabelezapura@gmail.com</u></p>
+                      <p class="h6"><u>WhatsApp: (11)96969-2424</u></p>
+
+                  </div>
+
+                  <div class="col-sm-4">
+
+                      <img src="imgs/iconeInstagram.png" width="50px" height="50px">
+
+                      <img src="imgs/iconeFacebook.png" width="50px" height="50px">
+                  </div>
+              </div>
+              
+
+          </div>
+      </footer>
+      
+      <div class="modal fade" id="modalPizza" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font" id="exampleModalLabel">Cadastrar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="caixa-cep" class="col-form-label font">Nome:</label>
+                            <input type="text" id="txtNome" class="form-control">
+                        
+                        </div>
+                        <div class="form-group">
+                            <label for="caixa-email" class="col-form-label font">Valor Grande:</label>
+                            <input type="text" id="txtValorGrande" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="caixa-email" class="col-form-label font">Valor Broto:</label>
+                            <input type="text" id="txtValorBroto" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="caixa-senha" class="col-form-label font">Detalhes:</label>
+                            <input type="text" id="txtDetalhes" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="caixa-cep" class="col-form-label font">Tipo:</label>
+                            <input type="text" id="txtTipo" class="form-control">
+                        
+                        </div>
+                        
+                        
+                        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                    <button type="button" id="btnAdicionarPizza" class="btn btn-primary" data-dismiss="modal">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+      <script type="text/javascript">
+
+
+
+          // Initialize Firebase
+
+            (function(){    
+                
+                
+                /*const txtEmail = document.getElementById('txtEmail');
+                const txtSenha = document.getElementById('txtSenha');
+                const btnLogin = document.getElementById('btnLogin');
+
+                btnLogin.addEventListener('click', e => {
+
+                    const emailLogin = txtEmail.value;
+                    const senhaLogin = txtSenha.value;
+
+                    const auth = firebase.auth();
+
+                    const promise = auth.signInWithEmailAndPassword(emailLogin,senhaLogin).catch(function(error){
+                       var errorCode = error.code;
+
+                        if(errorCode == 'auth/invalid-email'){
+                            console.log('email invalido');
+                        }else if(errorCode == 'auth/wrong-password'){
+                            console.log('senha errada');
+                        }else{
+                            console.log('Error: ' + errorCode);
+                        }
+                    });
+                });
+                
+            
+                
+                const txtEmailCadastrar = document.getElementById('txtEmailCadastrar');
+                const txtSenhaCadastrar = document.getElementById('txtSenhaCadastrar');
+                const btnCadastrar = document.getElementById('btnCadastrar');
+                
+                btnCadastrar.addEventListener('click', e => {
+                    const emailCadastrar =  txtEmailCadastrar.value;
+                    const senhaCadastrar =  txtSenhaCadastrar.value;
+                    
+                    
+                    firebase.auth().createUserWithEmailAndPassword(emailCadastrar, senhaCadastrar).catch(function(error) {
+                  
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                  
+                    });
+                });
+                
+                
+                const btnGoogle = document.getElementById('btnGoogle');
+                
+                btnGoogle.addEventListener('click', e => {
+                   
+                    var provider = new firebase.auth.GoogleAuthProvider();
+                    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+                    
+                    firebase.auth().signInWithPopup(provider).then(function(result){
+                        var token = result.credential.accessToken;
+                        var user = result.user;
+                        console.log(result);
+                        console.log("deu certo");
+                        
+                    }).catch(function(error){
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        var errorEmail = error.email;
+                        var credential = error.credential;
+                        console.log(errorCode, + "\n" + errorMessage);
+                    });
+                    
+                });*/
+                
+                /*service firebase.storage {
+                  match /b/{bucket}/o {
+                    match /{allPaths=**} {
+                      allow read, write: if request.auth != null;
+                    }
+                  }
+                }*/
+                
+                const banco = firebase.firestore();
+
+                const txtNomePizza = document.getElementById('txtNome');
+                const txtValorGrande = document.getElementById('txtValorGrande');
+                const txtValorBroto = document.getElementById('txtValorBroto');
+                const txtDetalhes = document.getElementById('txtDetalhes');
+                const txtTipo = document.getElementById('txtTipo');
+                
+                
+                const btnAdicionarPizza = document.getElementById('btnAdicionarPizza');
+                
+                btnAdicionarPizza.addEventListener('click', e => {
+                    
+                    const nomePizza = txtNomePizza.value;
+                    const ValorGrande = txtValorGrande.value;
+                    const ValorBroto = txtValorBroto.value;
+                    const Detalhes = txtDetalhes.value;
+                    const Tipo = txtTipo.value;
+                    
+                    
+                    banco.collection("pizzas").add({
+                        nome: nomePizza,
+                        valorGrande: ValorGrande,
+                        valorBroto: ValorBroto,
+                        detalhes: Detalhes,
+                        tipo: Tipo  
+
+                    }).then(function(docRef){
+                        console.log(docRef.id);
+                        console.log(nomePizza);
+                        
+                    }).catch(function(error){
+                        console.error(error);
+                    });
+                    
+                });
+                
+                
+            
+                const colRef = banco.collection("pizzas");
+
+                
+
+                colRef.orderBy("nome").get().then(function(querySnapshot){
+                    querySnapshot.forEach(function(doc){
+                        
+                        if(doc.exists){
+                            const obj = Object.values(doc.data());
+                            if(obj[2] == "doce"){
+                                const card = ['<div class="col-sm-4"> <div class="card mb-2 border border-dark"> <img src="imgs/pizza1.jpg" height="150px"> <div class="card-body py-2" style="height:200px"> <h4 class="card-title">' + obj[1] + '</h4> <h6 class="card-subtitle text-muted mb-2">Grande R$' + obj[4] + ',00</h6> <h6 class="card-subtitle text-muted mb-3">Broto R$' + obj[3] + ',00</h6> <p class="card-text">Detalhes: ' + obj[0] + '.</p> <a href="#" class="card-link">Comprar</a> <a href="#" class="card-link">Meio a Meio</a> </div> </div> </div>']
+
+                                document.getElementById('divPizzas').innerHTML += card ;
+                                console.log(obj);
+                             }else{
+                            console.log("erro doc1");
+                            }
+                        }else{
+                            console.log("erro doc");
+                        }
+
+                    });
+                }).catch(function(error){
+                   console.log(error) 
+                });
+
+            }());
+
+                
+            
+
+
+        </script>
+      
+    
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>  
+  </body>
+    
+</html>
